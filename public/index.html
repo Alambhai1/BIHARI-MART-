@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BIHARI MART</title>
+
+<style>
+* { box-sizing: border-box; }
+body { margin:0; font-family:Arial,sans-serif; background:#f1f5f9; color:#17263c; }
+header { background:linear-gradient(120deg,#10243e,#174d75); color:white; text-align:center; padding:32px 15px; }
+header h1 { margin:0; font-size:36px; letter-spacing:2px; }
+header p { margin:10px 0 0; font-size:16px; }
+main { max-width:1100px; margin:24px auto; padding:15px; }
+.card { background:white; padding:22px; margin-bottom:20px; border-radius:14px; box-shadow:0 3px 14px rgba(0,0,0,.07); }
+h2 { color:#123b60; margin-top:0; }
+button { background:#0875bd; color:white; border:0; padding:11px 18px; border-radius:7px; cursor:pointer; font-weight:bold; margin:5px 4px 5px 0; }
+button:hover { background:#07578d; }
+input,select,textarea { width:100%; padding:12px; margin:7px 0; border:1px solid #cbd5e1; border-radius:7px; font-size:15px; }
+textarea { min-height:90px; }
+ul { display:grid; grid-template-columns:repeat(auto-fit,minmax(190px,1fr)); gap:10px; padding-left:20px; }
+ul li { padding:9px; background:#edf5fb; border-radius:6px; }
+#approvedListings { display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:14px; margin-top:15px; }
+#approvedListings > div { background:#fff; }
+@media(max-width:600px) {
+ header { padding:25px 12px; }
+ header h1 { font-size:29px; }
+ main { padding:10px; margin:12px auto; }
+ .card { padding:16px; }
+}
+</style>
+</head>
+<body>
+
+<header>
+<h1>BIHARI MART</h1>
+<p>Global Industrial Machinery Marketplace</p>
+</header>
+
+<main>
+<div class="card">
+<h2>Welcome to BIHARI MART</h2>
+<p>Buy and Sell Industrial Machinery Worldwide.</p>
+</div>
+<div class="card">
+<h2>Machine Categories</h2>
+<ul>
+<li>CNC Machine</li>
+<li>VMC Machine</li>
+<li>HMC Machine</li>
+<li>TMC Machine</li>
+<li>Horizontal Boring</li>
+<li>Bolt Maker</li>
+<li>Header Machine</li>
+<li>Trimmer</li>
+<li>Rolling Machine</li>
+<li>CLG Grinding</li>
+<li>Rubber Moulding</li>
+<li>Nut Former</li>
+</ul>
+</div>
+
+<div class="card">
+
+<div class="card">
+<h2>Approved Machines - Buy Now</h2>
+<input id="machineSearch" type="search"
+placeholder="Search machines worldwide..."
+oninput="loadApprovedListings()">
+
+<select id="machineCategoryFilter" onchange="loadApprovedListings()">
+<option value="">All Categories</option>
+<option>CNC</option>
+<option>VMC</option>
+<option>HMC</option>
+<option>TMC</option>
+<option>Horizontal Boring</option>
+<option>Bolt Maker</option>
+<option>Header Machine</option>
+<option>Trimmer</option>
+<option>Rolling Machine</option>
+<option>CLG Grinding</option>
+<option>Rubber Moulding</option>
+<option>Nut Former</option>
+<option>Other</option>
+</select>
+
+<button onclick="loadApprovedListings()">Refresh Machines</button>
+<div id="approvedListings">Loading machines...</div>
+</div>
+
+<h2>Buyer & Seller Registration</h2>
+<input id="regName" type="text" placeholder="Full Name">
+<input id="regPhone" type="tel" placeholder="Mobile Number">
+<input id="regPassword" type="password" placeholder="Create Password">
+<select id="regRole">
+<option value="buyer">Buyer</option>
+<option value="seller">Seller</option>
+</select>
+<button onclick="registerUser()">Register</button>
+<p id="regMessage"></p>
+</div>
+
+<div class="card">
+<h2>Buyer / Seller / Admin Login</h2>
+<input id="loginPhone" type="tel" placeholder="Mobile Number">
+<input id="loginPassword" type="password" placeholder="Password">
+<button onclick="loginUser()">Login</button>
+<button onclick="logoutUser()">Logout</button>
+<p id="loginMessage"></p>
+</div>
+
+<div class="card" id="adminPanel" style="display:none">
+<h2>BIHARI MART - Admin Dashboard</h2>
+<p>Pending and other machine listings:</p>
+<button onclick="loadAdminListings()">Refresh Listings</button>
+<div id="adminListings"></div>
+<h3>Seller Verification</h3>
+<button onclick="loadAdminSellers()">Refresh Sellers</button>
+<div id="adminSellers">Seller list not loaded.</div>
+</div>
+
+<div class="card" id="sellerInbox" style="display:none">
+<h2>Seller Inbox - Buyer Messages</h2>
+<button onclick="loadSellerInquiries()">Refresh Messages</button>
+<div id="sellerMessages">No messages loaded.</div>
+</div>
+
+<div class="card">
+<h2>Sell Your Machine</h2>
+
+<input id="machineTitle" type="text" placeholder="Machine Name">
+
+<select id="machineCategory">
+<option value="">Select Category</option>
+<option>CNC</option>
+<option>VMC</option>
+<option>HMC</option>
+<option>Bolt Maker</option>
+<option>Rolling Machine</option>
+<option>CLG Grinding</option>
+<option>Other</option>
+</select>
+
+<input id="machineCountry" type="text" placeholder="Country (e.g. India)">
+<input id="machineState" type="text" placeholder="State / Province">
+<input id="machineCity" type="text" placeholder="City">
+
+<input id="machinePrice" type="number" min="1" placeholder="Machine Price">
+
+<select id="machineCurrency">
+<option>INR</option>
+<option>USD</option>
+<option>EUR</option>
+<option>GBP</option>
+<option>AED</option>
+</select>
+
+<input id="machineMedia" type="file" accept="image/jpeg,image/png,image/webp,video/mp4" multiple>
+<textarea id="machineDescription" placeholder="Machine Description"></textarea>
+
+<button onclick="publishMachine()">Publish Machine</button>
+<p id="publishMessage"></p>
+</div>
+
+<div class="card">
+<h2>Contact BIHARI MART</h2>
+<p>Buyers and sellers can connect worldwide.</p>
+<p>Planned successful sale commission: 3%</p>
+</div>
+</main>
+
+
+<script>
+
+async function loadApprovedListings() {
+  const box = document.getElementById("approvedListings");
+  if (!box) return;
+
+  box.textContent = "Loading machines...";
+
+  try {
+    const response = await fetch("/api/listings");
+    const listings = await response.json();
+
+    if (!response.ok) {
+      box.textContent = "Could not load machines.";
+      return;
+    }
+
+    const searchTerm = (document.getElementById("machineSearch")?.value || "").trim().toLowerCase();
+    const categoryFilter = (document.getElementById("machineCategoryFilter")?.value || "").trim().toLowerCase();
+
+    const filteredListings = listings.filter(item => {
+      const searchableText = [
+        item.title,
+        item.category,
+        item.description,
+        item.sellerName,
+        item.country,
+        item.state,
+        item.city
+      ].join(" ").toLowerCase();
+
+      const matchesSearch = searchableText.includes(searchTerm);
+      const matchesCategory = !categoryFilter ||
+        String(item.category || "").toLowerCase().includes(categoryFilter);
+
+      return matchesSearch && matchesCategory;
+    });
+
+    box.replaceChildren();
+
+    if (!filteredListings.length) {
+      box.textContent = "No approved machines available yet.";
+      return;
+    }
+
+    filteredListings.forEach(item => {
+      const card = document.createElement("div");
+      card.style.cssText = "background:#fff;border:1px solid #dbe4ee;padding:18px;margin:12px 0;border-radius:14px;box-shadow:0 4px 14px rgba(0,0,0,.08);overflow:hidden";
+
+      const title = document.createElement("h3");
+      title.style.cssText = "font-size:20px;color:#123b60;margin:4px 0 12px";
+      title.textContent = item.title || "Machine";
+      card.appendChild(title);
+
+      const price = document.createElement("p");
+      price.style.cssText = "font-size:23px;font-weight:700;color:#15803d;margin:12px 0";
+      price.textContent = "Price: " + item.price + " " + item.currency;
+      card.appendChild(price);
+
+      const category = document.createElement("p");
+      category.style.cssText = "display:inline-block;background:#edf5fb;color:#174d75;padding:6px 10px;border-radius:6px;font-weight:bold";
+      category.textContent = "Category: " + item.category;
+      card.appendChild(category);
+      const sellerInfo = document.createElement("p");
+      sellerInfo.textContent = "Seller: " + (item.sellerName || "BIHARI MART Seller");
+      sellerInfo.style.cssText = "font-size:14px;color:#475569;font-weight:600;margin:10px 0";
+
+      if (item.sellerVerified === true) {
+        const badge = document.createElement("span");
+        badge.textContent = " ✓ Verified";
+        badge.style.cssText = "color:#15803d;font-weight:700;margin-left:6px";
+        sellerInfo.appendChild(badge);
+      }
+
+      card.appendChild(sellerInfo);
+
+      const location = document.createElement("p");
+      location.textContent = "Location: " +
+        [item.city, item.state, item.country].filter(Boolean).join(", ");
+      location.style.cssText = "font-size:14px;color:#475569;margin:8px 0";
+      if (location.textContent !== "Location: ") {
+        card.appendChild(location);
+      }
+
+      const description = document.createElement("p");
+      description.textContent = item.description || "No description";
+      card.appendChild(description);
+
+      (item.media || []).forEach(path => {
+        const isVideo = /\.mp4$/i.test(path);
+        const media = document.createElement(isVideo ? "video" : "img");
+        media.src = path;
+        media.style.cssText = "width:100%;height:190px;object-fit:contain;background:#f8fafc;border-radius:10px;display:block;margin:12px 0";
+        if (isVideo) media.controls = true;
+        else media.alt = item.title || "Machine photo";
+        card.appendChild(media);
+      });
+
+
+      const contactBox = document.createElement("div");
+
+      const inquiryInput = document.createElement("textarea");
+      inquiryInput.placeholder = "Write your message to the seller";
+      inquiryInput.maxLength = 1000;
+      inquiryInput.style.cssText = "width:100%;min-height:75px;box-sizing:border-box;margin-top:10px";
+
+      const sendButton = document.createElement("button");
+      sendButton.textContent = "Contact Seller";
+
+      const inquiryStatus = document.createElement("p");
+
+      const buyNowButton = document.createElement("button");
+      buyNowButton.textContent = "Buy Now";
+      buyNowButton.style.cssText = "background:#15803d;margin:8px 5px 8px 0";
+      buyNowButton.addEventListener("click", () => {
+        inquiryStatus.textContent = "To proceed, write your purchase inquiry below.";
+        inquiryInput.scrollIntoView({behavior:"smooth", block:"center"});
+        inquiryInput.focus();
+      });
+
+      sendButton.addEventListener("click", async () => {
+        const message = inquiryInput.value.trim();
+
+        if (!message) {
+          inquiryStatus.textContent = "Please write a message first.";
+          return;
+        }
+
+        sendButton.disabled = true;
+        inquiryStatus.textContent = "Sending...";
+
+        try {
+          const response = await fetch("/api/inquiries", {
+            method: "POST",
+            credentials: "same-origin",
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify({
+              listingId: item.id,
+              message: message
+            })
+          });
+
+          const data = await response.json();
+          inquiryStatus.textContent = data.message || "Request failed";
+
+          if (response.ok) {
+            inquiryInput.value = "";
+          }
+        } catch (error) {
+          inquiryStatus.textContent = "Error: " + error.message;
+        } finally {
+          sendButton.disabled = false;
+        }
+      });
+
+      contactBox.appendChild(buyNowButton);
+      contactBox.appendChild(inquiryInput);
+      contactBox.appendChild(sendButton);
+      contactBox.appendChild(inquiryStatus);
+      card.appendChild(contactBox);
+
+      box.appendChild(card);
+    });
+  } catch (error) {
+    box.textContent = "Could not connect to server.";
+  }
+}
+
+
+async function loadSellerInquiries() {
+  const box = document.getElementById("sellerMessages");
+  box.textContent = "Loading messages...";
+
+  try {
+    const response = await fetch("/api/seller/inquiries", {
+      credentials: "same-origin"
+    });
+    const messages = await response.json();
+
+    if (!response.ok) {
+      box.textContent = messages.message || "Could not load messages.";
+      return;
+    }
+
+    box.replaceChildren();
+
+    if (messages.length === 0) {
+      box.textContent = "No buyer messages yet.";
+      return;
+    }
+
+    messages.forEach(item => {
+      const card = document.createElement("div");
+      card.style.cssText = "border:1px solid #ccc;padding:12px;margin:10px 0;border-radius:8px";
+
+      const title = document.createElement("h3");
+      title.textContent = item.listingTitle || "Machine Inquiry";
+
+      const buyer = document.createElement("p");
+      buyer.textContent = "Buyer: " + item.buyerName;
+
+      const message = document.createElement("p");
+      message.textContent = "Message: " + item.message;
+
+      const date = document.createElement("p");
+      date.textContent = "Date: " + new Date(item.createdAt).toLocaleString();
+
+      card.append(title, buyer, message, date);
+      box.appendChild(card);
+    });
+  } catch (error) {
+    box.textContent = "Server connection failed.";
+  }
+}
+
+async function registerUser() {
+  const name = document.getElementById("regName").value.trim();
+  const phone = document.getElementById("regPhone").value.trim();
+  const password = document.getElementById("regPassword").value;
+  const role = document.getElementById("regRole").value;
+  const msg = document.getElementById("regMessage");
+
+  msg.textContent = "Please wait...";
+
+  try {
+    const response = await fetch("/api/register", {
+      method: "POST",
+      headers: {"Content-Type": "application/json"},
+      body: JSON.stringify({name, phone, password, role})
+    });
+
+    const data = await response.json();
+    msg.textContent = data.message || "Registration failed";
+
+  } catch (error) {
+    msg.textContent = "Server connection failed";
+  }
+}
+
+async function loginUser() {
+  const phone = document.getElementById("loginPhone").value.trim();
+  const password = document.getElementById("loginPassword").value;
+  const msg = document.getElementById("loginMessage");
+
+  msg.textContent = "Please wait...";
+
+  try {
+    const response = await fetch("/api/login", {
+      method: "POST",
+      credentials: "same-origin",
+      headers: {"Content-Type": "application/json"},
+      body: JSON.stringify({phone, password})
+    });
+
+    const data = await response.json();
+    msg.textContent = data.message || "Login failed";
+
+    if (response.ok) {
+      const check = await fetch("/api/me", {
+        credentials: "same-origin"
+      });
+      const sessionData = await check.json();
+      msg.textContent = check.ok
+        ? "Login successful - Role: " + sessionData.user.role
+        : "Login successful, but session not saved";
+    }
+
+    if (response.ok) {
+      const role = data.user.role;
+
+      const adminPanel = document.getElementById("adminPanel");
+      const sellerInbox = document.getElementById("sellerInbox");
+
+      adminPanel.style.display = role === "admin" ? "block" : "none";
+      sellerInbox.style.display = role === "seller" ? "block" : "none";
+
+      if (role === "admin") {
+        await loadAdminListings();
+        await loadAdminSellers();
+      }
+
+      if (role === "seller") {
+        await loadSellerInquiries();
+      }
+    }
+  } catch (error) {
+    msg.textContent = "Server connection failed";
+  }
+}
+
+
+async function loadAdminSellers() {
+  const box = document.getElementById("adminSellers");
+  box.textContent = "Loading sellers...";
+
+  try {
+    const response = await fetch("/api/admin/sellers", {
+      credentials: "same-origin"
+    });
+    const sellers = await response.json();
+
+    if (!response.ok) {
+      box.textContent = sellers.message || "Admin access required";
+      return;
+    }
+
+    box.replaceChildren();
+
+    if (sellers.length === 0) {
+      box.textContent = "No sellers registered.";
+      return;
+    }
+
+    sellers.forEach(seller => {
+      const card = document.createElement("div");
+      card.style.cssText = "border:1px solid #dbe4ee;padding:12px;margin:10px 0;border-radius:8px";
+
+      const name = document.createElement("p");
+      name.textContent = "Seller: " + seller.name;
+      card.appendChild(name);
+
+      const status = document.createElement("p");
+      status.textContent = seller.verified ? "Verified Seller" : "Not Verified";
+      status.style.color = seller.verified ? "green" : "#b45309";
+      card.appendChild(status);
+
+      const button = document.createElement("button");
+      button.textContent = seller.verified ? "Remove Verification" : "Verify Seller";
+      button.onclick = () => updateSellerVerification(seller.id, !seller.verified);
+      card.appendChild(button);
+
+      box.appendChild(card);
+    });
+  } catch (error) {
+    box.textContent = "Could not load sellers.";
+  }
+}
+
+async function updateSellerVerification(id, verified) {
+  const action = verified ? "verify" : "remove verification from";
+  if (!confirm("Are you sure you want to " + action + " this seller?")) return;
+
+  try {
+    const response = await fetch("/api/admin/sellers/" + encodeURIComponent(id) + "/verification", {
+      method: "PATCH",
+      credentials: "same-origin",
+      headers: {"Content-Type": "application/json"},
+      body: JSON.stringify({verified})
+    });
+
+    const data = await response.json();
+    alert(data.message || "Request failed");
+
+    if (response.ok) await loadAdminSellers();
+  } catch (error) {
+    alert("Server connection failed");
+  }
+}
+
+async function loadAdminListings() {
+  const box = document.getElementById("adminListings");
+  box.textContent = "Loading listings...";
+
+  try {
+    const response = await fetch("/api/admin/listings");
+    const listings = await response.json();
+
+    if (!response.ok) {
+      box.textContent = listings.message || "Admin access required";
+      return;
+    }
+
+    box.replaceChildren();
+
+    if (listings.length === 0) {
+      box.textContent = "No machine listings found.";
+      return;
+    }
+
+    listings.forEach(item => {
+      const card = document.createElement("div");
+      card.style.border = "1px solid #ccc";
+      card.style.padding = "12px";
+      card.style.margin = "12px 0";
+      card.style.borderRadius = "8px";
+
+      const details = document.createElement("p");
+      details.textContent =
+        "Machine: " + item.title +
+        " | Category: " + item.category +
+        " | Price: " + item.price + " " + item.currency +
+        " | Seller: " + item.sellerName +
+        " | Status: " + item.status;
+
+      card.appendChild(details);
+
+      if (item.description) {
+        const description = document.createElement("p");
+        description.textContent = item.description;
+        card.appendChild(description);
+      }
+
+      if (item.status === "pending") {
+        ["approved", "rejected"].forEach(status => {
+          const button = document.createElement("button");
+          button.textContent = status === "approved" ? "Approve" : "Reject";
+          button.style.marginRight = "8px";
+          button.onclick = () => updateListingStatus(item.id, status);
+          card.appendChild(button);
+        });
+      }
+
+      box.appendChild(card);
+    });
+  } catch (error) {
+    box.textContent = "Could not load listings.";
+  }
+}
+
+async function updateListingStatus(id, status) {
+  if (!confirm("Are you sure you want to " + status + " this listing?")) {
+    return;
+  }
+
+  try {
+    const response = await fetch("/api/admin/listings/" + encodeURIComponent(id) + "/status", {
+      method: "PATCH",
+      headers: {"Content-Type": "application/json"},
+      body: JSON.stringify({status})
+    });
+
+    const data = await response.json();
+    alert(data.message || "Request failed");
+
+    if (response.ok) {
+      await loadAdminListings();
+    }
+  } catch (error) {
+    alert("Server connection failed");
+  }
+}
+
+async function logoutUser() {
+  try {
+    const response = await fetch("/api/logout", {method: "POST"});
+    const data = await response.json();
+    document.getElementById("adminPanel").style.display = "none";
+    document.getElementById("loginMessage").textContent = data.message;
+  } catch (error) {
+    document.getElementById("loginMessage").textContent = "Logout failed";
+  }
+}
+
+
+async function publishMachine() {
+  const msg = document.getElementById("publishMessage");
+  const files = document.getElementById("machineMedia").files;
+
+  if (files.length > 5) {
+    msg.textContent = "Maximum 5 photos/videos allowed";
+    return;
+  }
+
+  const form = new FormData();
+  form.append("title", document.getElementById("machineTitle").value.trim());
+  form.append("category", document.getElementById("machineCategory").value);
+  form.append("price", document.getElementById("machinePrice").value);
+  form.append("currency", document.getElementById("machineCurrency").value);
+  form.append("country", document.getElementById("machineCountry").value.trim());
+  form.append("state", document.getElementById("machineState").value.trim());
+  form.append("city", document.getElementById("machineCity").value.trim());
+  form.append("description", document.getElementById("machineDescription").value);
+
+  for (const file of files) {
+    form.append("media", file);
+  }
+
+  msg.textContent = "Uploading...";
+
+  try {
+    const response = await fetch("/api/listings", {
+      method: "POST",
+      credentials: "same-origin",
+      body: form
+    });
+
+    const data = await response.json();
+    msg.textContent = data.message || "Upload failed";
+
+    if (response.ok) {
+      document.getElementById("machineTitle").value = "";
+      document.getElementById("machineCategory").value = "";
+      document.getElementById("machinePrice").value = "";
+      document.getElementById("machineCountry").value = "";
+      document.getElementById("machineState").value = "";
+      document.getElementById("machineCity").value = "";
+      document.getElementById("machineDescription").value = "";
+      document.getElementById("machineMedia").value = "";
+    }
+  } catch (error) {
+    msg.textContent = "Server connection failed";
+  }
+}
+
+
+loadApprovedListings();
+</script>
+
+</body>
+</html>

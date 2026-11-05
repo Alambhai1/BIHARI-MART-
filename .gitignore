@@ -1,0 +1,24 @@
+.env
+node_modules/
+backups/
+*.log
+users.json
+inquiries.json
+listings.json
+public/uploads/
+
+# Private data and old backups
+users*.json
+inquiries*.json
+listings*.json
+*.backup*
+*.before-*
+*.pre-*
+*-backup*.js
+*-before-*.js
+setup-admin.js
+inline-check.js
+index-before-*.html
+server.js.upload-backup
+public/index-*.html
+public/index-before-css-fix.htm
