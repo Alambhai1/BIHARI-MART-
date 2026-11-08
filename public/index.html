@@ -5,30 +5,280 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>BIHARI MART</title>
 
+
 <style>
-* { box-sizing: border-box; }
-body { margin:0; font-family:Arial,sans-serif; background:#f1f5f9; color:#17263c; }
-header { background:linear-gradient(120deg,#10243e,#174d75); color:white; text-align:center; padding:32px 15px; }
-header h1 { margin:0; font-size:36px; letter-spacing:2px; }
-header p { margin:10px 0 0; font-size:16px; }
-main { max-width:1100px; margin:24px auto; padding:15px; }
-.card { background:white; padding:22px; margin-bottom:20px; border-radius:14px; box-shadow:0 3px 14px rgba(0,0,0,.07); }
-h2 { color:#123b60; margin-top:0; }
-button { background:#0875bd; color:white; border:0; padding:11px 18px; border-radius:7px; cursor:pointer; font-weight:bold; margin:5px 4px 5px 0; }
-button:hover { background:#07578d; }
-input,select,textarea { width:100%; padding:12px; margin:7px 0; border:1px solid #cbd5e1; border-radius:7px; font-size:15px; }
-textarea { min-height:90px; }
-ul { display:grid; grid-template-columns:repeat(auto-fit,minmax(190px,1fr)); gap:10px; padding-left:20px; }
-ul li { padding:9px; background:#edf5fb; border-radius:6px; }
-#approvedListings { display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:14px; margin-top:15px; }
-#approvedListings > div { background:#fff; }
-@media(max-width:600px) {
- header { padding:25px 12px; }
- header h1 { font-size:29px; }
- main { padding:10px; margin:12px auto; }
- .card { padding:16px; }
+* {
+  box-sizing: border-box;
+}
+
+:root {
+  --navy: #10243e;
+  --blue: #174d75;
+  --orange: #f28c28;
+  --light: #f3f6fb;
+  --text: #1b2d42;
+  --muted: #64748b;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: var(--light);
+  color: var(--text);
+  line-height: 1.6;
+}
+
+header {
+  background: linear-gradient(125deg, #09182b, #123e65, #17618a);
+  color: white;
+  text-align: center;
+  padding: 48px 16px;
+  border-bottom: 5px solid var(--orange);
+}
+
+header h1 {
+  margin: 0;
+  font-size: clamp(32px, 5vw, 48px);
+  font-weight: 900;
+  letter-spacing: 3px;
+}
+
+header p {
+  margin: 12px 0 0;
+  color: #dceafa;
+  font-size: 17px;
+  letter-spacing: .5px;
+}
+
+main {
+  max-width: 1180px;
+  margin: 32px auto;
+  padding: 16px;
+}
+
+.card {
+  background: white;
+  padding: 25px;
+  margin-bottom: 24px;
+  border: 1px solid #e2e8f0;
+  border-radius: 16px;
+  box-shadow: 0 5px 20px rgba(15, 35, 60, .06);
+  transition: box-shadow .2s ease;
+}
+
+.card:hover {
+  box-shadow: 0 9px 26px rgba(15, 35, 60, .10);
+}
+
+h2 {
+  color: var(--navy);
+  font-size: 23px;
+  margin-top: 0;
+  margin-bottom: 14px;
+  font-weight: 800;
+}
+
+h2::after {
+  content: "";
+  display: block;
+  width: 48px;
+  height: 3px;
+  background: var(--orange);
+  margin-top: 9px;
+  border-radius: 5px;
+}
+
+h3 {
+  color: var(--blue);
+}
+
+p {
+  color: #526174;
+}
+
+button {
+  background: linear-gradient(120deg, #0875bd, #174d75);
+  color: white;
+  border: 0;
+  padding: 12px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 14px;
+  margin: 5px 4px 5px 0;
+  transition: .2s ease;
+}
+
+button:hover {
+  background: var(--orange);
+  transform: translateY(-1px);
+}
+
+input, select, textarea {
+  width: 100%;
+  padding: 13px 14px;
+  margin: 8px 0;
+  border: 1px solid #d5deea;
+  border-radius: 9px;
+  background: #fbfdff;
+  color: var(--text);
+  font-size: 15px;
+  outline: none;
+}
+
+input:focus, select:focus, textarea:focus {
+  border-color: #1685c5;
+  box-shadow: 0 0 0 3px rgba(22, 133, 197, .12);
+}
+
+textarea {
+  min-height: 110px;
+  resize: vertical;
+}
+
+ul {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(175px, 1fr));
+  gap: 12px;
+  padding: 0;
+  list-style: none;
+}
+
+ul li {
+  padding: 15px;
+  background: #f0f6fc;
+  border: 1px solid #dce8f4;
+  border-left: 4px solid var(--orange);
+  border-radius: 9px;
+  font-weight: 700;
+  color: var(--navy);
+  transition: .2s ease;
+}
+
+ul li:hover {
+  background: #e2effb;
+  transform: translateY(-2px);
+}
+
+#approvedListings {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 18px;
+  margin-top: 18px;
+}
+
+#approvedListings > div {
+  background: white;
+  border: 1px solid #e0e7ef;
+  border-radius: 13px;
+  padding: 16px;
+  box-shadow: 0 3px 12px rgba(0,0,0,.05);
+  overflow-wrap: anywhere;
+}
+
+#adminListings > div,
+#adminSellers > div,
+#adminInquiries > div,
+#sellerMessages > div {
+  background: #fbfdff;
+  border: 1px solid #dce5ef;
+  border-radius: 10px;
+  padding: 15px;
+  margin: 12px 0;
+  overflow-wrap: anywhere;
+}
+
+a {
+  color: #0875bd;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+a:hover {
+  color: var(--orange);
+  text-decoration: underline;
+}
+
+#publishMessage,
+#loginMessage,
+#regMessage {
+  font-weight: 700;
+}
+
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 22px;
+}
+
+.hero-btn {
+  display: inline-block;
+  padding: 13px 22px;
+  border-radius: 9px;
+  text-align: center;
+  text-decoration: none;
+}
+
+.hero-btn.primary {
+  background: #174d75;
+  color: white;
+}
+
+.hero-btn.secondary {
+  background: #f28c28;
+  color: white;
+}
+
+.hero-btn:hover {
+  opacity: .88;
+  text-decoration: none;
+}
+
+@media(max-width: 600px) {
+  header {
+    padding: 34px 12px;
+  }
+
+  header h1 {
+    font-size: 30px;
+    letter-spacing: 2px;
+  }
+
+  header p {
+    font-size: 14px;
+  }
+
+  main {
+    margin: 12px auto;
+    padding: 10px;
+  }
+
+  .card {
+    padding: 17px;
+    border-radius: 12px;
+    margin-bottom: 16px;
+  }
+
+  h2 {
+    font-size: 20px;
+  }
+
+  button {
+    max-width: 100%;
+  }
+
+  #approvedListings {
+    grid-template-columns: 1fr;
+  }
 }
 </style>
+
 </head>
 <body>
 
@@ -40,7 +290,12 @@ ul li { padding:9px; background:#edf5fb; border-radius:6px; }
 <main>
 <div class="card">
 <h2>Welcome to BIHARI MART</h2>
+
 <p>Buy and Sell Industrial Machinery Worldwide.</p>
+<div class="hero-actions">
+  <a class="hero-btn primary" href="#approvedListings">Explore Machines</a>
+  <a class="hero-btn secondary" href="#sellMachine">Sell Your Machine</a>
+</div>
 </div>
 <div class="card">
 <h2>Machine Categories</h2>
@@ -89,16 +344,118 @@ oninput="loadApprovedListings()">
 <div id="approvedListings">Loading machines...</div>
 </div>
 
-<h2>Buyer & Seller Registration</h2>
-<input id="regName" type="text" placeholder="Full Name">
-<input id="regPhone" type="tel" placeholder="Mobile Number">
-<input id="regPassword" type="password" placeholder="Create Password">
-<select id="regRole">
+<h2>International Company Registration</h2>
+
+<label>Full Name *</label>
+<input id="regName" type="text" placeholder="Full Name" required>
+
+<label>Mobile Number *</label>
+<input id="regPhone" type="tel" placeholder="Mobile Number (digits with country code)" required>
+
+<label>Create Password *</label>
+<input id="regPassword" type="password" placeholder="Minimum 8 characters" required>
+
+<label>Account Type *</label>
+<select id="regRole" required>
 <option value="buyer">Buyer</option>
 <option value="seller">Seller</option>
 </select>
-<button onclick="registerUser()">Register</button>
+
+<label>Company Name *</label>
+<input id="regCompanyName" type="text" placeholder="Registered Company Name" required>
+
+<label>Business Type *</label>
+<select id="regBusinessType" required>
+<option value="">Select Business Type</option>
+<option>Manufacturer</option>
+<option>Exporter</option>
+<option>Importer</option>
+<option>Supplier</option>
+<option>Dealer/Distributor</option>
+<option>Trading Company</option>
+</select>
+
+<label>Country *</label>
+<input id="regCountry" type="text" placeholder="Country" required>
+
+<label>State / Province</label>
+<input id="regState" type="text" placeholder="State / Province">
+
+<label>City</label>
+<input id="regCity" type="text" placeholder="City">
+
+<label>WhatsApp Number</label>
+<input id="regWhatsapp" type="tel" placeholder="WhatsApp with country code">
+
+<label>Business Email</label>
+<input id="regEmail" type="email" placeholder="Company Email">
+
+<label>GSTIN (if applicable)</label>
+<input id="regGstin" type="text" placeholder="GSTIN">
+
+<label>Import Export Code - IEC (if applicable)</label>
+<input id="regIec" type="text" placeholder="IEC Number">
+
+<label>Company Website</label>
+<input id="regWebsite" type="url" placeholder="https://example.com">
+
+<p>GSTIN and IEC are optional and depend on applicable country rules.</p>
+
+<button onclick="registerUser()">Register Company</button>
 <p id="regMessage"></p>
+</div>
+
+
+<div class="card" id="governmentComplianceCenter">
+<h2>Government Compliance Center</h2>
+<p><strong>Platform Name:</strong> BIHARI MART</p>
+<p><strong>Proposed Legal Company Name:</strong> BIHARI MART INDIA PRIVATE LIMITED</p>
+<p><strong>Company Registration Status:</strong> Not Yet Registered</p>
+<p><strong>Proposed Operating Location:</strong> Haryana, India</p>
+<p><strong>Registered Office:</strong> Not Yet Finalized</p>
+
+<h3>Government Registration Status</h3>
+<ul>
+<li>Company Incorporation / CIN: Pending</li>
+<li>Company PAN: Pending</li>
+<li>TAN: Pending</li>
+<li>GSTIN: Not Registered</li>
+<li>Udyam / MSME: Not Registered</li>
+<li>Import Export Code (IEC): Not Registered</li>
+</ul>
+
+<h3>Official Government Portals</h3>
+<ul>
+<li><a href="https://www.mca.gov.in/" target="_blank" rel="noopener">MCA – Company Name and Incorporation</a></li>
+<li><a href="https://www.gst.gov.in/" target="_blank" rel="noopener">GST – GST Registration</a></li>
+<li><a href="https://www.incometax.gov.in/" target="_blank" rel="noopener">Income Tax – PAN / TAN Information</a></li>
+<li><a href="https://udyamregistration.gov.in/" target="_blank" rel="noopener">Udyam – MSME Registration</a></li>
+<li><a href="https://www.dgft.gov.in/" target="_blank" rel="noopener">DGFT – Import Export Code (IEC)</a></li>
+</ul>
+
+<p>BIHARI MART provides information and links to official government portals. Registration, approval and issuance of certificates are subject to government rules and approval. BIHARI MART is not a government website.</p>
+</div>
+
+
+<div class="card" id="sellerCommissionPolicy">
+<h2>Seller Commission & Payment Policy</h2>
+
+<p><strong>BIHARI MART Platform Commission: 3%</strong></p>
+<p>BIHARI MART will charge only the Seller a 3% platform commission on successful sales. No platform commission will be charged to the Buyer.</p>
+
+<h3>Our Commitments</h3>
+<ul>
+<li>Commission will apply only after a successful sale, subject to the platform terms.</li>
+<li>The applicable commission amount will be clearly shown to the Seller before order confirmation.</li>
+<li>No hidden platform commission or undisclosed platform fee will be charged.</li>
+<li>Applicable taxes and statutory deductions, if any, will be handled according to Indian law.</li>
+<li>Seller payment will be settled to the Seller's verified bank account after applicable commission, deductions and settlement checks.</li>
+<li>BIHARI MART will review and approve machine listings according to its verification policy and help Buyers and Sellers connect.</li>
+</ul>
+
+<p><strong>Transparency Promise:</strong> BIHARI MART aims to provide honest, fair and transparent marketplace services. Buyers and Sellers should review order details and payment terms before confirming a transaction.</p>
+
+<p><strong>Payment Status:</strong> Online commission calculation, wallet and bank settlement features will be activated after payment system integration.</p>
 </div>
 
 <div class="card">
@@ -118,6 +475,9 @@ oninput="loadApprovedListings()">
 <h3>Seller Verification</h3>
 <button onclick="loadAdminSellers()">Refresh Sellers</button>
 <div id="adminSellers">Seller list not loaded.</div>
+<h3>Buyer Inquiries</h3>
+<button onclick="loadAdminInquiries()">Refresh Inquiries</button>
+<div id="adminInquiries">No inquiries loaded.</div>
 </div>
 
 <div class="card" id="sellerInbox" style="display:none">
@@ -126,7 +486,7 @@ oninput="loadApprovedListings()">
 <div id="sellerMessages">No messages loaded.</div>
 </div>
 
-<div class="card">
+<div class="card" id="sellMachine">
 <h2>Sell Your Machine</h2>
 
 <input id="machineTitle" type="text" placeholder="Machine Name">
@@ -163,10 +523,61 @@ oninput="loadApprovedListings()">
 <p id="publishMessage"></p>
 </div>
 
-<div class="card">
+
+<div class="card" id="founderMission" style="padding:24px;margin-bottom:20px;border-radius:14px;background:#eef4ff">
+<h2>Our Founder Mission</h2>
+<h3>A Dream Built on Honesty</h3>
+<p>BIHARI MART is starting from zero, but our vision is global.</p>
+<p>Our mission is to connect buyers and sellers around the world through honest, transparent and reliable business.</p>
+
+<h3>Our Commitments</h3>
+<ul>
+<li>We will follow all applicable government laws, policies and regulations.</li>
+<li>We will never support fraud, fake documents or illegal business activities.</li>
+<li>We will treat Buyers and Sellers fairly and transparently.</li>
+<li>We aim to create opportunities for small businesses and financially weaker people.</li>
+<li>We will work to build trust in every transaction.</li>
+</ul>
+
+<p><strong>Our Promise:</strong> We may begin with zero financial resources, but we will build our future with honesty, hard work and trust.</p>
+
+<h3>Honest Business, Global Opportunities.</h3>
+<p>BIHARI MART – A Better Opportunity for Everyone.</p>
+</div>
+<div class="card" style="padding:24px;border-radius:14px;background:#f8fafc">
 <h2>Contact BIHARI MART</h2>
-<p>Buyers and sellers can connect worldwide.</p>
-<p>Planned successful sale commission: 3%</p>
+<p>Global Industrial Machinery Marketplace</p>
+<p>Connecting buyers and sellers worldwide.</p>
+
+<div style="margin:18px 0">
+<h3>Business Support</h3>
+<p>Phone / WhatsApp:
+<a href="https://wa.me/919992894530" target="_blank" rel="noopener">
++91 9992894530
+</a></p>
+
+<p>Business Email:
+<a href="mailto:firoz.alam591@gmail.com">
+firoz.alam591@gmail.com
+</a></p>
+<div id="rohtakOfficeAddress" style="margin-top:18px;padding:15px;background:#eef4ff;border-radius:10px">
+<h3>BIHARI MART – Operating Office Address</h3>
+<p>Hissar Bhiwani Link Road,<br>
+Near Railway Fatak,<br>
+Kutana Basti,<br>
+Rohtak, Haryana – 124001</p>
+</div>
+
+</div>
+
+<div style="padding:15px;background:#e8f5e9;border-radius:10px">
+<h3>Planned Sale Commission: 3%</h3>
+<p>Commission will apply to successful sales as per the final platform policy.</p>
+</div>
+
+<p style="margin-top:18px;font-weight:bold">
+BIHARI MART – Your Global Machinery Business Partner
+</p>
 </div>
 </main>
 
@@ -387,24 +798,48 @@ async function loadSellerInquiries() {
 }
 
 async function registerUser() {
-  const name = document.getElementById("regName").value.trim();
-  const phone = document.getElementById("regPhone").value.trim();
-  const password = document.getElementById("regPassword").value;
-  const role = document.getElementById("regRole").value;
-  const msg = document.getElementById("regMessage");
+  const getValue = (id) =>
+    document.getElementById(id).value.trim();
 
+  const name = getValue("regName");
+  const phone = getValue("regPhone");
+  const password = document.getElementById("regPassword").value;
+  const role = getValue("regRole");
+
+  const payload = {
+    name,
+    phone,
+    password,
+    role,
+    companyName: getValue("regCompanyName"),
+    businessType: getValue("regBusinessType"),
+    country: getValue("regCountry"),
+    state: getValue("regState"),
+    city: getValue("regCity"),
+    whatsapp: getValue("regWhatsapp"),
+    email: getValue("regEmail"),
+    gstin: getValue("regGstin"),
+    iec: getValue("regIec"),
+    website: getValue("regWebsite")
+  };
+
+  const msg = document.getElementById("regMessage");
   msg.textContent = "Please wait...";
 
   try {
     const response = await fetch("/api/register", {
       method: "POST",
+      credentials: "same-origin",
       headers: {"Content-Type": "application/json"},
-      body: JSON.stringify({name, phone, password, role})
+      body: JSON.stringify(payload)
     });
 
     const data = await response.json();
     msg.textContent = data.message || "Registration failed";
 
+    if (response.ok) {
+      msg.textContent = "Company registration successful. You are logged in.";
+    }
   } catch (error) {
     msg.textContent = "Server connection failed";
   }
@@ -450,6 +885,7 @@ async function loginUser() {
       if (role === "admin") {
         await loadAdminListings();
         await loadAdminSellers();
+        await loadAdminInquiries();
       }
 
       if (role === "seller") {
@@ -458,6 +894,108 @@ async function loginUser() {
     }
   } catch (error) {
     msg.textContent = "Server connection failed";
+  }
+}
+
+
+async function loadAdminInquiries() {
+  const box = document.getElementById("adminInquiries");
+  box.textContent = "Loading inquiries...";
+
+  try {
+    const response = await fetch("/api/admin/inquiries", {
+      credentials: "same-origin"
+    });
+    const inquiries = await response.json();
+
+    if (!response.ok) {
+      box.textContent = inquiries.message || "Could not load inquiries";
+      return;
+    }
+
+    box.replaceChildren();
+
+    if (!Array.isArray(inquiries) || inquiries.length === 0) {
+      box.textContent = "No buyer inquiries found.";
+      return;
+    }
+
+    inquiries.forEach(item => {
+      const card = document.createElement("div");
+      card.style.cssText =
+        "border:1px solid #dbe4ee;padding:12px;margin:10px 0;border-radius:8px";
+
+      const details = document.createElement("p");
+      details.textContent =
+        "Buyer: " + (item.buyerName || "N/A") +
+        " | Machine: " + (item.listingTitle || "N/A") +
+        " | Seller ID: " + (item.sellerId || "N/A") +
+        " | Status: " + (item.status || "N/A");
+      card.appendChild(details);
+
+      const message = document.createElement("p");
+      message.textContent = "Message: " + (item.message || "No message");
+      card.appendChild(message);
+
+      const date = document.createElement("p");
+      date.textContent = "Date: " +
+        (item.createdAt ? new Date(item.createdAt).toLocaleString() : "N/A");
+      card.appendChild(date);
+
+      const statusLabel = document.createElement("label");
+      statusLabel.textContent = "Update Status: ";
+      const statusSelect = document.createElement("select");
+
+      ["new", "contacted", "closed"].forEach(status => {
+        const option = document.createElement("option");
+        option.value = status;
+        option.textContent = status.toUpperCase();
+        statusSelect.appendChild(option);
+      });
+
+      statusSelect.value = ["new", "contacted", "closed"].includes(item.status)
+        ? item.status
+        : "new";
+
+      statusSelect.addEventListener("change", () => {
+        updateInquiryStatus(item.id, statusSelect.value);
+      });
+
+      statusLabel.appendChild(statusSelect);
+      card.appendChild(statusLabel);
+
+      box.appendChild(card);
+    });
+  } catch (error) {
+    box.textContent = "Server connection failed";
+  }
+}
+
+
+async function updateInquiryStatus(id, status) {
+  try {
+    const response = await fetch(
+      "/api/admin/inquiries/" + encodeURIComponent(id) + "/status",
+      {
+        method: "PATCH",
+        credentials: "same-origin",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ status })
+      }
+    );
+
+    const result = await response.json();
+
+    if (!response.ok) {
+      alert(result.message || "Status update failed");
+      await loadAdminInquiries();
+      return;
+    }
+
+    alert("Inquiry status updated: " + status.toUpperCase());
+    await loadAdminInquiries();
+  } catch (error) {
+    alert("Server connection failed");
   }
 }
 

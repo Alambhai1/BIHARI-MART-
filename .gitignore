@@ -22,3 +22,4 @@ index-before-*.html
 server.js.upload-backup
 public/index-*.html
 public/index-before-css-fix.htm
+.neon
