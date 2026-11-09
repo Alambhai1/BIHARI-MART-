@@ -724,6 +724,46 @@ app.patch("/api/admin/inquiries/:id/status", requireAdmin, async (req, res) => {
   }
 });
 
+
+// Admin: read-only founder commission ledger
+app.get("/api/admin/commission-wallet", requireAdmin, async (req, res) => {
+  try {
+    const summary = await pool.query(`
+      SELECT
+        currency,
+        COALESCE(SUM(gross_amount) FILTER (WHERE status = 'confirmed'), 0)::text AS confirmed_sales,
+        COALESCE(SUM(commission_amount) FILTER (WHERE status = 'confirmed'), 0)::text AS confirmed_commission,
+        COALESCE(SUM(gross_amount) FILTER (WHERE status = 'pending_verification'), 0)::text AS pending_sales,
+        COALESCE(SUM(commission_amount) FILTER (WHERE status = 'pending_verification'), 0)::text AS pending_commission,
+        COUNT(*) FILTER (WHERE status = 'confirmed')::int AS confirmed_count,
+        COUNT(*) FILTER (WHERE status = 'pending_verification')::int AS pending_count
+      FROM founder_commission_ledger
+      GROUP BY currency
+      ORDER BY currency
+    `);
+
+    const entries = await pool.query(`
+      SELECT id, order_reference, seller_id,
+             gross_amount::text, commission_rate::text,
+             commission_amount::text, currency,
+             payment_reference, status, created_at
+      FROM founder_commission_ledger
+      ORDER BY created_at DESC
+      LIMIT 50
+    `);
+
+    res.json({
+      summary: summary.rows,
+      entries: entries.rows,
+      withdrawalEnabled: false,
+      note: "Ledger records only. Real funds are not held or withdrawable through this feature."
+    });
+  } catch (error) {
+    console.error("Commission wallet load error:", error);
+    res.status(500).json({ message: "Could not load commission wallet" });
+  }
+});
+
 app.listen(process.env.PORT || 3000, "0.0.0.0", () => {
   console.log("BIHARI MART Server Running");
   console.log("Open http://localhost:3000");
