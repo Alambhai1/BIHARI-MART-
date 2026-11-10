@@ -283,6 +283,9 @@ a:hover {
 <body>
 
 <header>
+<img src="/bihari-mart-logo.png"
+     alt="BIHARI MART Logo"
+     style="display:block;width:100%;max-width:260px;max-height:180px;object-fit:contain;margin:0 auto 12px;">
 <h1>BIHARI MART</h1>
 <p>Global Industrial Machinery Marketplace</p>
 </header>
@@ -376,7 +379,31 @@ oninput="loadApprovedListings()">
 <label>Account Type *</label>
 <select id="regRole" required>
 <option value="buyer">Buyer</option>
-<option value="seller">Seller</option>
+<option value="seller">Seller / Business Account</option>
+</select>
+
+<label>Business Identity *</label>
+<select id="regBusinessIdentity" required>
+<option value="">Select Your Business Identity</option>
+<option value="Company Owner">Company Owner</option>
+<option value="Manufacturer">Manufacturer</option>
+<option value="Dealer">Dealer / Distributor</option>
+<option value="Supplier">Supplier</option>
+<option value="Exporter">Exporter</option>
+<option value="Importer">Importer</option>
+<option value="Trading Company">Trading Company</option>
+</select>
+
+<label>Business Sector *</label>
+<select id="regBusinessSector" required>
+<option value="">Select Business Sector</option>
+<option>Bus</option>
+<option>Truck</option>
+<option>Car</option>
+<option>Bike / Motorcycle</option>
+<option>Automobile Parts</option>
+<option>Industrial Machinery</option>
+<option>Other Business</option>
 </select>
 
 <label>Company Name *</label>
@@ -461,6 +488,37 @@ oninput="loadApprovedListings()">
 
 <h3>Calling Companies Worldwide!</h3>
 
+<h3>🚀 Special Global Invitation to Elon Musk's Companies</h3>
+
+<p>
+BIHARI MART warmly invites the following companies to explore
+business opportunities, marketplace participation and potential
+partnerships with BIHARI MART:
+</p>
+
+<ul>
+<li><strong>Tesla</strong> – Electric Vehicles and Energy</li>
+<li><strong>SpaceX</strong> – Space Technology</li>
+<li><strong>Starlink</strong> – Satellite Internet</li>
+<li><strong>xAI</strong> – Artificial Intelligence</li>
+<li><strong>Neuralink</strong> – Brain-Computer Technology</li>
+<li><strong>The Boring Company</strong> – Tunnelling and Infrastructure</li>
+<li><strong>X</strong> – Social Media Platform</li>
+</ul>
+
+<p>
+We welcome these companies to register, introduce their businesses,
+showcase eligible products and contact BIHARI MART to explore
+possible collaboration.
+</p>
+
+<p>
+<strong>Invitation Status:</strong> Open invitation.
+No partnership, registration, endorsement or affiliation is confirmed
+unless officially agreed by the respective company.
+</p>
+
+
 <p>BIHARI MART invites manufacturers, factories, industrial companies, automobile companies, dealers, distributors and suppliers from all countries to showcase their products on our global industrial marketplace.</p>
 
 <h3>Products We Welcome</h3>
@@ -535,6 +593,12 @@ oninput="loadApprovedListings()">
 <p><strong>Important:</strong> This is an accounting ledger only. Real funds are not held here. Withdrawals are disabled until payment gateway approval and settlement integration.</p>
 <button onclick="loadAdminWallet()">Refresh Commission Wallet</button>
 <div id="adminWallet">Wallet not loaded.</div>
+
+<h3>Confidential Government Assistance</h3>
+<p>Private administrative section. Visible only to authenticated Admin.</p>
+<button onclick="loadAdminGovernmentRequest()">View Government Request</button>
+<div id="adminGovernmentRequest">Request not loaded.</div>
+
 </div>
 
 <div class="card" id="sellerInbox" style="display:none">
@@ -893,6 +957,8 @@ async function registerUser() {
     role,
     companyName: getValue("regCompanyName"),
     businessType: getValue("regBusinessType"),
+    businessIdentity: getValue("regBusinessIdentity"),
+    businessSector: getValue("regBusinessSector"),
     country: getValue("regCountry"),
     state: getValue("regState"),
     city: getValue("regCity"),
@@ -967,6 +1033,7 @@ async function loginUser() {
         await loadAdminSellers();
         await loadAdminInquiries();
         await loadAdminWallet();
+        await loadAdminGovernmentRequest();
       }
 
       if (role === "seller") {
@@ -1081,6 +1148,35 @@ async function updateInquiryStatus(id, status) {
 }
 
 
+
+
+async function loadAdminGovernmentRequest() {
+  const box = document.getElementById("adminGovernmentRequest");
+  box.textContent = "Loading confidential request...";
+
+  try {
+    const response = await fetch("/api/admin/government-assistance", {
+      credentials: "same-origin",
+      cache: "no-store"
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      box.textContent = "Admin access required.";
+      return;
+    }
+
+    box.textContent =
+      data.title + "\n" +
+      "Visibility: " + data.visibility + "\n" +
+      "Status: " + data.status + "\n\n" +
+      data.request.join("\n\n") + "\n\n" +
+      data.note;
+  } catch (error) {
+    box.textContent = "Could not load confidential request.";
+  }
+}
 
 async function loadAdminWallet() {
   const box = document.getElementById("adminWallet");
@@ -1637,5 +1733,6 @@ loadApprovedListings();
 <p style="text-align:center;"><a href="https://www.india.gov.in/directory/helpline" target="_blank" rel="noopener noreferrer">Official Government Helpline Directory</a></p>
 </section>
 
+<script src="/education.js"></script>
 </body>
 </html>
