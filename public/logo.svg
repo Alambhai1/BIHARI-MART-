@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 120">
+<rect width="500" height="120" rx="15" fill="white"/>
+<circle cx="58" cy="60" r="48" fill="#092c75"/>
+<path d="M27 73L58 25L91 73H73L58 49L43 73Z" fill="white"/>
+<path d="M16 83Q60 102 105 48" fill="none" stroke="#e21c2a" stroke-width="7"/>
+<text x="120" y="54" font-family="Arial" font-weight="900" font-size="39" fill="#092c75">BIHARI <tspan fill="#d71920">MART</tspan></text>
+<text x="122" y="86" font-family="Arial" font-weight="bold" font-size="23" fill="#092c75">INDIA PVT. LTD.</text>
+</svg>

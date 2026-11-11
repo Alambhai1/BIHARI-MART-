@@ -1,0 +1,1706 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BIHARI MART</title>
+
+
+<style>
+* {
+  box-sizing: border-box;
+}
+
+:root {
+  --navy: #10243e;
+  --blue: #174d75;
+  --orange: #f28c28;
+  --light: #f3f6fb;
+  --text: #1b2d42;
+  --muted: #64748b;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: var(--light);
+  color: var(--text);
+  line-height: 1.6;
+}
+
+header {
+  background: linear-gradient(125deg, #09182b, #123e65, #17618a);
+  color: white;
+  text-align: center;
+  padding: 48px 16px;
+  border-bottom: 5px solid var(--orange);
+}
+
+header h1 {
+  margin: 0;
+  font-size: clamp(32px, 5vw, 48px);
+  font-weight: 900;
+  letter-spacing: 3px;
+}
+
+header p {
+  margin: 12px 0 0;
+  color: #dceafa;
+  font-size: 17px;
+  letter-spacing: .5px;
+}
+
+main {
+  max-width: 1180px;
+  margin: 32px auto;
+  padding: 16px;
+}
+
+.card {
+  background: white;
+  padding: 25px;
+  margin-bottom: 24px;
+  border: 1px solid #e2e8f0;
+  border-radius: 16px;
+  box-shadow: 0 5px 20px rgba(15, 35, 60, .06);
+  transition: box-shadow .2s ease;
+}
+
+.card:hover {
+  box-shadow: 0 9px 26px rgba(15, 35, 60, .10);
+}
+
+h2 {
+  color: var(--navy);
+  font-size: 23px;
+  margin-top: 0;
+  margin-bottom: 14px;
+  font-weight: 800;
+}
+
+h2::after {
+  content: "";
+  display: block;
+  width: 48px;
+  height: 3px;
+  background: var(--orange);
+  margin-top: 9px;
+  border-radius: 5px;
+}
+
+h3 {
+  color: var(--blue);
+}
+
+p {
+  color: #526174;
+}
+
+button {
+  background: linear-gradient(120deg, #0875bd, #174d75);
+  color: white;
+  border: 0;
+  padding: 12px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 14px;
+  margin: 5px 4px 5px 0;
+  transition: .2s ease;
+}
+
+button:hover {
+  background: var(--orange);
+  transform: translateY(-1px);
+}
+
+input, select, textarea {
+  width: 100%;
+  padding: 13px 14px;
+  margin: 8px 0;
+  border: 1px solid #d5deea;
+  border-radius: 9px;
+  background: #fbfdff;
+  color: var(--text);
+  font-size: 15px;
+  outline: none;
+}
+
+input:focus, select:focus, textarea:focus {
+  border-color: #1685c5;
+  box-shadow: 0 0 0 3px rgba(22, 133, 197, .12);
+}
+
+textarea {
+  min-height: 110px;
+  resize: vertical;
+}
+
+ul {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(175px, 1fr));
+  gap: 12px;
+  padding: 0;
+  list-style: none;
+}
+
+ul li {
+  padding: 15px;
+  background: #f0f6fc;
+  border: 1px solid #dce8f4;
+  border-left: 4px solid var(--orange);
+  border-radius: 9px;
+  font-weight: 700;
+  color: var(--navy);
+  transition: .2s ease;
+}
+
+ul li:hover {
+  background: #e2effb;
+  transform: translateY(-2px);
+}
+
+#approvedListings {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 18px;
+  margin-top: 18px;
+}
+
+#approvedListings > div {
+  background: white;
+  border: 1px solid #e0e7ef;
+  border-radius: 13px;
+  padding: 16px;
+  box-shadow: 0 3px 12px rgba(0,0,0,.05);
+  overflow-wrap: anywhere;
+}
+
+#adminListings > div,
+#adminSellers > div,
+#adminInquiries > div,
+#sellerMessages > div {
+  background: #fbfdff;
+  border: 1px solid #dce5ef;
+  border-radius: 10px;
+  padding: 15px;
+  margin: 12px 0;
+  overflow-wrap: anywhere;
+}
+
+a {
+  color: #0875bd;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+a:hover {
+  color: var(--orange);
+  text-decoration: underline;
+}
+
+#publishMessage,
+#loginMessage,
+#regMessage {
+  font-weight: 700;
+}
+
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 22px;
+}
+
+.hero-btn {
+  display: inline-block;
+  padding: 13px 22px;
+  border-radius: 9px;
+  text-align: center;
+  text-decoration: none;
+}
+
+.hero-btn.primary {
+  background: #174d75;
+  color: white;
+}
+
+.hero-btn.secondary {
+  background: #f28c28;
+  color: white;
+}
+
+.hero-btn:hover {
+  opacity: .88;
+  text-decoration: none;
+}
+
+@media(max-width: 600px) {
+  header {
+    padding: 34px 12px;
+  }
+
+  header h1 {
+    font-size: 30px;
+    letter-spacing: 2px;
+  }
+
+  header p {
+    font-size: 14px;
+  }
+
+  main {
+    margin: 12px auto;
+    padding: 10px;
+  }
+
+  .card {
+    padding: 17px;
+    border-radius: 12px;
+    margin-bottom: 16px;
+  }
+
+  h2 {
+    font-size: 20px;
+  }
+
+  button {
+    max-width: 100%;
+  }
+
+  #approvedListings {
+    grid-template-columns: 1fr;
+  }
+}
+</style>
+
+</head>
+<body>
+
+<header>
+<img src="/bihari-mart-logo.png"
+     alt="BIHARI MART Logo"
+     style="display:block;width:100%;max-width:260px;max-height:180px;object-fit:contain;margin:0 auto 12px;">
+<h1>BIHARI MART</h1>
+<p>Global Industrial Machinery Marketplace</p>
+</header>
+
+<main>
+<div class="card">
+<h2>Welcome to BIHARI MART</h2>
+
+<p>Buy and Sell Industrial Machinery Worldwide.</p>
+<div class="hero-actions">
+  <a class="hero-btn primary" href="#approvedListings">Explore Machines</a>
+  <a class="hero-btn secondary" href="#sellMachine">Sell Your Machine</a>
+  <a class="hero-btn primary" href="#travel-portal">🚆✈️ Travel Booking</a>
+</div>
+</div>
+<div class="card">
+<h2>Machine Categories</h2>
+<ul>
+<li>CNC Machine</li>
+<li>VMC Machine</li>
+<li>HMC Machine</li>
+<li>TMC Machine</li>
+<li>Horizontal Boring</li>
+<li>Bolt Maker</li>
+<li>Header Machine</li>
+<li>Trimmer</li>
+<li>Rolling Machine</li>
+<li>CLG Grinding</li>
+<li>Rubber Moulding</li>
+<li>Nut Former</li>
+</ul>
+</div>
+
+<div class="card">
+
+<div class="card">
+<h2>Approved Machines - Buy Now</h2>
+<input id="machineSearch" type="search"
+placeholder="Search machines worldwide..."
+oninput="loadApprovedListings()">
+
+<select id="machineCategoryFilter" onchange="loadApprovedListings()">
+<option value="">All Categories</option>
+<option>Cars</option>
+<option>Bikes</option>
+<option>Scooters</option>
+<option>Bus</option>
+<option>Truck</option>
+<option>Tractor</option>
+<option>JCB</option>
+<option>Construction Equipment</option>
+<option>Auto Parts</option>
+<option>Car Spare Parts</option>
+<option>Bike Spare Parts</option>
+<option>Truck & Bus Parts</option>
+<option>Tractor Parts</option>
+<option>Engine Parts</option>
+<option>Gearbox & Clutch</option>
+<option>Brake Parts</option>
+<option>Electrical Parts</option>
+<option>CNC</option>
+<option>VMC</option>
+<option>HMC</option>
+<option>TMC</option>
+<option>Horizontal Boring</option>
+<option>Bolt Maker</option>
+<option>Header Machine</option>
+<option>Trimmer</option>
+<option>Rolling Machine</option>
+<option>CLG Grinding</option>
+<option>Rubber Moulding</option>
+<option>Nut Former</option>
+<option>Other</option>
+</select>
+
+<button onclick="loadApprovedListings()">Refresh Machines</button>
+<div id="approvedListings">Loading machines...</div>
+</div>
+
+<h2>International Company Registration</h2>
+
+<label>Full Name *</label>
+<input id="regName" type="text" placeholder="Full Name" required>
+
+<label>Mobile Number *</label>
+<input id="regPhone" type="tel" placeholder="Mobile Number (digits with country code)" required>
+
+<label>Create Password *</label>
+<input id="regPassword" type="password" placeholder="Minimum 8 characters" required>
+
+<label>Account Type *</label>
+<select id="regRole" required>
+<option value="buyer">Buyer</option>
+<option value="seller">Seller / Business Account</option>
+</select>
+
+<label>Business Identity *</label>
+<select id="regBusinessIdentity" required>
+<option value="">Select Your Business Identity</option>
+<option value="Company Owner">Company Owner</option>
+<option value="Manufacturer">Manufacturer</option>
+<option value="Dealer">Dealer / Distributor</option>
+<option value="Supplier">Supplier</option>
+<option value="Exporter">Exporter</option>
+<option value="Importer">Importer</option>
+<option value="Trading Company">Trading Company</option>
+</select>
+
+<label>Business Sector *</label>
+<select id="regBusinessSector" required>
+<option value="">Select Business Sector</option>
+<option>Bus</option>
+<option>Truck</option>
+<option>Car</option>
+<option>Bike / Motorcycle</option>
+<option>Automobile Parts</option>
+<option>Industrial Machinery</option>
+<option>Other Business</option>
+</select>
+
+<label>Company Name *</label>
+<input id="regCompanyName" type="text" placeholder="Registered Company Name" required>
+
+<label>Business Type *</label>
+<select id="regBusinessType" required>
+<option value="">Select Business Type</option>
+<option>Manufacturer</option>
+<option>Exporter</option>
+<option>Importer</option>
+<option>Supplier</option>
+<option>Dealer/Distributor</option>
+<option>Trading Company</option>
+</select>
+
+<label>Country *</label>
+<input id="regCountry" type="text" placeholder="Country" required>
+
+<label>State / Province</label>
+<input id="regState" type="text" placeholder="State / Province">
+
+<label>City</label>
+<input id="regCity" type="text" placeholder="City">
+
+<label>WhatsApp Number</label>
+<input id="regWhatsapp" type="tel" placeholder="WhatsApp with country code">
+
+<label>Business Email</label>
+<input id="regEmail" type="email" placeholder="Company Email">
+
+<label>GSTIN (if applicable)</label>
+<input id="regGstin" type="text" placeholder="GSTIN">
+
+<label>Import Export Code - IEC (if applicable)</label>
+<input id="regIec" type="text" placeholder="IEC Number">
+
+<label>Company Website</label>
+<input id="regWebsite" type="url" placeholder="https://example.com">
+
+<p>GSTIN and IEC are optional and depend on applicable country rules.</p>
+
+<button onclick="registerUser()">Register Company</button>
+<p id="regMessage"></p>
+</div>
+
+
+<div class="card" id="governmentComplianceCenter">
+<h2>Government Compliance Center</h2>
+<p><strong>Platform Name:</strong> BIHARI MART</p>
+<p><strong>Proposed Legal Company Name:</strong> BIHARI MART INDIA PRIVATE LIMITED</p>
+<p><strong>Company Registration Status:</strong> Not Yet Registered</p>
+<p><strong>Proposed Operating Location:</strong> Haryana, India</p>
+<p><strong>Registered Office:</strong> Not Yet Finalized</p>
+
+<h3>Government Registration Status</h3>
+<ul>
+<li>Company Incorporation / CIN: Pending</li>
+<li>Company PAN: Pending</li>
+<li>TAN: Pending</li>
+<li>GSTIN: Not Registered</li>
+<li>Udyam / MSME: Not Registered</li>
+<li>Import Export Code (IEC): Not Registered</li>
+</ul>
+
+<h3>Official Government Portals</h3>
+<ul>
+<li><a href="https://www.mca.gov.in/" target="_blank" rel="noopener">MCA – Company Name and Incorporation</a></li>
+<li><a href="https://www.gst.gov.in/" target="_blank" rel="noopener">GST – GST Registration</a></li>
+<li><a href="https://www.incometax.gov.in/" target="_blank" rel="noopener">Income Tax – PAN / TAN Information</a></li>
+<li><a href="https://udyamregistration.gov.in/" target="_blank" rel="noopener">Udyam – MSME Registration</a></li>
+<li><a href="https://www.dgft.gov.in/" target="_blank" rel="noopener">DGFT – Import Export Code (IEC)</a></li>
+</ul>
+
+<p>BIHARI MART provides information and links to official government portals. Registration, approval and issuance of certificates are subject to government rules and approval. BIHARI MART is not a government website.</p>
+</div>
+
+
+
+<div class="card" id="global-manufacturers-invitation" style="background:#eef8ff;border:2px solid #2878b8;padding:24px;border-radius:14px;">
+<h2>🌍 Global Manufacturers & Suppliers – Welcome to BIHARI MART</h2>
+
+<h3>Calling Companies Worldwide!</h3>
+
+<p>BIHARI MART invites manufacturers, factories, industrial companies, automobile companies, dealers, distributors and suppliers from all countries to showcase their products on our global industrial marketplace.</p>
+
+<h3>Products We Welcome</h3>
+<ul>
+<li>Industrial Machinery – CNC, VMC, HMC and other machines</li>
+<li>Automobile Parts & Components</li>
+<li>Engineering Products</li>
+<li>Industrial Spare Parts & Tools</li>
+<li>Manufacturing Equipment</li>
+<li>Metal, Plastic and Rubber Products</li>
+<li>Other Industrial Products</li>
+</ul>
+
+<h3>Why Join BIHARI MART?</h3>
+<ul>
+<li>Showcase your company and products.</li>
+<li>Connect with buyers worldwide.</li>
+<li>Receive enquiries from interested buyers.</li>
+<li>Grow your business through an international marketplace.</li>
+</ul>
+
+<p><strong>Manufacturers, Companies and Suppliers: Join BIHARI MART and take your business worldwide!</strong></p>
+
+<p>Register as a Seller and upload your products in the available categories. All listings are subject to platform review, verification and approval.</p>
+
+<p><strong>BIHARI MART – Connecting Industries Worldwide.</strong></p>
+</div>
+
+<div class="card" id="sellerCommissionPolicy">
+<h2>Seller Commission & Payment Policy</h2>
+
+<p><strong>BIHARI MART Platform Commission: 3%</strong></p>
+<p>BIHARI MART will charge only the Seller a 3% platform commission on successful sales. No platform commission will be charged to the Buyer.</p>
+
+<h3>Our Commitments</h3>
+<ul>
+<li>Commission will apply only after a successful sale, subject to the platform terms.</li>
+<li>The applicable commission amount will be clearly shown to the Seller before order confirmation.</li>
+<li>No hidden platform commission or undisclosed platform fee will be charged.</li>
+<li>Applicable taxes and statutory deductions, if any, will be handled according to Indian law.</li>
+<li>Seller payment will be settled to the Seller's verified bank account after applicable commission, deductions and settlement checks.</li>
+<li>BIHARI MART will review and approve machine listings according to its verification policy and help Buyers and Sellers connect.</li>
+</ul>
+
+<p><strong>Transparency Promise:</strong> BIHARI MART aims to provide honest, fair and transparent marketplace services. Buyers and Sellers should review order details and payment terms before confirming a transaction.</p>
+
+<p><strong>Payment Status:</strong> Online commission calculation, wallet and bank settlement features will be activated after payment system integration.</p>
+</div>
+
+<div class="card">
+<h2>Buyer / Seller / Admin Login</h2>
+<input id="loginPhone" type="tel" placeholder="Mobile Number">
+<input id="loginPassword" type="password" placeholder="Password">
+<button onclick="loginUser()">Login</button>
+<button onclick="logoutUser()">Logout</button>
+<p id="loginMessage"></p>
+</div>
+
+<div class="card" id="adminPanel" style="display:none">
+<h2>BIHARI MART - Admin Dashboard</h2>
+<p>Pending and other machine listings:</p>
+<button onclick="loadAdminListings()">Refresh Listings</button>
+<div id="adminListings"></div>
+<h3>Seller Verification</h3>
+<button onclick="loadAdminSellers()">Refresh Sellers</button>
+<div id="adminSellers">Seller list not loaded.</div>
+<h3>Buyer Inquiries</h3>
+<button onclick="loadAdminInquiries()">Refresh Inquiries</button>
+<div id="adminInquiries">No inquiries loaded.</div>
+
+<h3>Founder Commission Wallet (Ledger)</h3>
+<p><strong>Important:</strong> This is an accounting ledger only. Real funds are not held here. Withdrawals are disabled until payment gateway approval and settlement integration.</p>
+<button onclick="loadAdminWallet()">Refresh Commission Wallet</button>
+<div id="adminWallet">Wallet not loaded.</div>
+
+<h3>Confidential Government Assistance</h3>
+<p>Private administrative section. Visible only to authenticated Admin.</p>
+<button onclick="loadAdminGovernmentRequest()">View Government Request</button>
+<div id="adminGovernmentRequest">Request not loaded.</div>
+
+</div>
+
+<div class="card" id="sellerInbox" style="display:none">
+<h2>Seller Inbox - Buyer Messages</h2>
+<button onclick="loadSellerInquiries()">Refresh Messages</button>
+<div id="sellerMessages">No messages loaded.</div>
+</div>
+
+<div class="card" id="sellMachine">
+<h2>Sell Your Product, Vehicle or Machine</h2>
+
+<input id="machineTitle" type="text" placeholder="Product / Vehicle / Machine Name">
+
+<select id="machineCategory">
+<option value="">Select Category</option>
+<option>Cars</option>
+<option>Bikes</option>
+<option>Scooters</option>
+<option>Bus</option>
+<option>Truck</option>
+<option>Tractor</option>
+<option>JCB</option>
+<option>Construction Equipment</option>
+<option>Auto Parts</option>
+<option>Car Spare Parts</option>
+<option>Bike Spare Parts</option>
+<option>Truck & Bus Parts</option>
+<option>Tractor Parts</option>
+<option>Engine Parts</option>
+<option>Gearbox & Clutch</option>
+<option>Brake Parts</option>
+<option>Electrical Parts</option>
+<option>CNC</option>
+<option>VMC</option>
+<option>HMC</option>
+<option>TMC</option>
+<option>Horizontal Boring</option>
+<option>Bolt Maker</option>
+<option>Header Machine</option>
+<option>Trimmer</option>
+<option>Rolling Machine</option>
+<option>CLG Grinding</option>
+<option>Rubber Moulding</option>
+<option>Nut Former</option>
+<option>Other</option>
+</select>
+
+<input id="machineCountry" type="text" placeholder="Country (e.g. India)">
+<input id="machineState" type="text" placeholder="State / Province">
+<input id="machineCity" type="text" placeholder="City">
+
+<input id="machinePrice" type="number" min="1" placeholder="Machine Price">
+
+<select id="machineCurrency">
+<option>INR</option>
+<option>USD</option>
+<option>EUR</option>
+<option>GBP</option>
+<option>AED</option>
+</select>
+
+<input id="machineMedia" type="file" accept="image/jpeg,image/png,image/webp,video/mp4" multiple>
+<textarea id="machineDescription" placeholder="Machine Description"></textarea>
+
+<button onclick="publishMachine()">Publish Machine</button>
+<p id="publishMessage"></p>
+</div>
+
+
+<div class="card" id="founderMission" style="padding:24px;margin-bottom:20px;border-radius:14px;background:#eef4ff">
+<h2>Our Founder Mission</h2>
+<h3>A Dream Built on Honesty</h3>
+<p>BIHARI MART is starting from zero, but our vision is global.</p>
+<p>Our mission is to connect buyers and sellers around the world through honest, transparent and reliable business.</p>
+
+<h3>Our Commitments</h3>
+<ul>
+<li>We will follow all applicable government laws, policies and regulations.</li>
+<li>We will never support fraud, fake documents or illegal business activities.</li>
+<li>We will treat Buyers and Sellers fairly and transparently.</li>
+<li>We aim to create opportunities for small businesses and financially weaker people.</li>
+<li>We will work to build trust in every transaction.</li>
+</ul>
+
+<p><strong>Our Promise:</strong> We may begin with zero financial resources, but we will build our future with honesty, hard work and trust.</p>
+
+<h3>Honest Business, Global Opportunities.</h3>
+<p>BIHARI MART – A Better Opportunity for Everyone.</p>
+</div>
+<div class="card" style="padding:24px;border-radius:14px;background:#f8fafc">
+<h2>Contact BIHARI MART</h2>
+<p>Global Industrial Machinery Marketplace</p>
+<p>Connecting buyers and sellers worldwide.</p>
+
+<div style="margin:18px 0">
+<h3>Business Support</h3>
+<p>Phone / WhatsApp:
+<a href="https://wa.me/919992894530" target="_blank" rel="noopener">
++91 9992894530
+</a></p>
+
+<p>Business Email:
+<a href="mailto:firoz.alam591@gmail.com">
+firoz.alam591@gmail.com
+</a></p>
+<div id="rohtakOfficeAddress" style="margin-top:18px;padding:15px;background:#eef4ff;border-radius:10px">
+<h3>BIHARI MART – Operating Office Address</h3>
+<p>Hissar Bhiwani Link Road,<br>
+Near Railway Fatak,<br>
+Kutana Basti,<br>
+Rohtak, Haryana – 124001</p>
+</div>
+
+</div>
+
+<div style="padding:15px;background:#e8f5e9;border-radius:10px">
+<h3>Planned Sale Commission: 3%</h3>
+<p>Commission will apply to successful sales as per the final platform policy.</p>
+</div>
+
+<p style="margin-top:18px;font-weight:bold">
+BIHARI MART – Your Global Machinery Business Partner
+</p>
+</div>
+</main>
+
+
+<script>
+
+async function loadApprovedListings() {
+  const box = document.getElementById("approvedListings");
+  if (!box) return;
+
+  box.textContent = "Loading machines...";
+
+  try {
+    const response = await fetch("/api/listings");
+    const listings = await response.json();
+
+    if (!response.ok) {
+      box.textContent = "Could not load machines.";
+      return;
+    }
+
+    const searchTerm = (document.getElementById("machineSearch")?.value || "").trim().toLowerCase();
+    const categoryFilter = (document.getElementById("machineCategoryFilter")?.value || "").trim().toLowerCase();
+
+    const filteredListings = listings.filter(item => {
+      const searchableText = [
+        item.title,
+        item.category,
+        item.description,
+        item.sellerName,
+        item.country,
+        item.state,
+        item.city
+      ].join(" ").toLowerCase();
+
+      const matchesSearch = searchableText.includes(searchTerm);
+      const matchesCategory = !categoryFilter ||
+        String(item.category || "").toLowerCase().includes(categoryFilter);
+
+      return matchesSearch && matchesCategory;
+    });
+
+    box.replaceChildren();
+
+    if (!filteredListings.length) {
+      box.textContent = "No approved machines available yet.";
+      return;
+    }
+
+    filteredListings.forEach(item => {
+      const card = document.createElement("div");
+      card.style.cssText = "background:#fff;border:1px solid #dbe4ee;padding:18px;margin:12px 0;border-radius:14px;box-shadow:0 4px 14px rgba(0,0,0,.08);overflow:hidden";
+
+      const title = document.createElement("h3");
+      title.style.cssText = "font-size:20px;color:#123b60;margin:4px 0 12px";
+      title.textContent = item.title || "Machine";
+      card.appendChild(title);
+
+      const price = document.createElement("p");
+      price.style.cssText = "font-size:23px;font-weight:700;color:#15803d;margin:12px 0";
+      price.textContent = "Price: " + item.price + " " + item.currency;
+      card.appendChild(price);
+
+      const category = document.createElement("p");
+      category.style.cssText = "display:inline-block;background:#edf5fb;color:#174d75;padding:6px 10px;border-radius:6px;font-weight:bold";
+      category.textContent = "Category: " + item.category;
+      card.appendChild(category);
+      const sellerInfo = document.createElement("p");
+      sellerInfo.textContent = "Seller: " + (item.sellerName || "BIHARI MART Seller");
+      sellerInfo.style.cssText = "font-size:14px;color:#475569;font-weight:600;margin:10px 0";
+
+      if (item.sellerVerified === true) {
+        const badge = document.createElement("span");
+        badge.textContent = " ✓ Verified";
+        badge.style.cssText = "color:#15803d;font-weight:700;margin-left:6px";
+        sellerInfo.appendChild(badge);
+      }
+
+      card.appendChild(sellerInfo);
+
+      const location = document.createElement("p");
+      location.textContent = "Location: " +
+        [item.city, item.state, item.country].filter(Boolean).join(", ");
+      location.style.cssText = "font-size:14px;color:#475569;margin:8px 0";
+      if (location.textContent !== "Location: ") {
+        card.appendChild(location);
+      }
+
+      const description = document.createElement("p");
+      description.textContent = item.description || "No description";
+      card.appendChild(description);
+
+      (item.media || []).forEach(path => {
+        const isVideo = /\.mp4$/i.test(path);
+        const media = document.createElement(isVideo ? "video" : "img");
+        media.src = path;
+        media.style.cssText = "width:100%;height:190px;object-fit:contain;background:#f8fafc;border-radius:10px;display:block;margin:12px 0";
+        if (isVideo) media.controls = true;
+        else media.alt = item.title || "Machine photo";
+        card.appendChild(media);
+      });
+
+
+      const contactBox = document.createElement("div");
+
+      const inquiryInput = document.createElement("textarea");
+      inquiryInput.placeholder = "Write your message to the seller";
+      inquiryInput.maxLength = 1000;
+      inquiryInput.style.cssText = "width:100%;min-height:75px;box-sizing:border-box;margin-top:10px";
+
+      const sendButton = document.createElement("button");
+      sendButton.textContent = "Contact Seller";
+
+      const inquiryStatus = document.createElement("p");
+
+      const buyNowButton = document.createElement("button");
+      buyNowButton.textContent = "Buy Now";
+      buyNowButton.style.cssText = "background:#15803d;margin:8px 5px 8px 0";
+      buyNowButton.addEventListener("click", () => {
+        inquiryStatus.textContent = "To proceed, write your purchase inquiry below.";
+        inquiryInput.scrollIntoView({behavior:"smooth", block:"center"});
+        inquiryInput.focus();
+      });
+
+      sendButton.addEventListener("click", async () => {
+        const message = inquiryInput.value.trim();
+
+        if (!message) {
+          inquiryStatus.textContent = "Please write a message first.";
+          return;
+        }
+
+        sendButton.disabled = true;
+        inquiryStatus.textContent = "Sending...";
+
+        try {
+          const response = await fetch("/api/inquiries", {
+            method: "POST",
+            credentials: "same-origin",
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify({
+              listingId: item.id,
+              message: message
+            })
+          });
+
+          const data = await response.json();
+          inquiryStatus.textContent = data.message || "Request failed";
+
+          if (response.ok) {
+            inquiryInput.value = "";
+          }
+        } catch (error) {
+          inquiryStatus.textContent = "Error: " + error.message;
+        } finally {
+          sendButton.disabled = false;
+        }
+      });
+
+      contactBox.appendChild(buyNowButton);
+      contactBox.appendChild(inquiryInput);
+      contactBox.appendChild(sendButton);
+      contactBox.appendChild(inquiryStatus);
+      card.appendChild(contactBox);
+
+      box.appendChild(card);
+    });
+  } catch (error) {
+    box.textContent = "Could not connect to server.";
+  }
+}
+
+
+async function loadSellerInquiries() {
+  const box = document.getElementById("sellerMessages");
+  box.textContent = "Loading messages...";
+
+  try {
+    const response = await fetch("/api/seller/inquiries", {
+      credentials: "same-origin"
+    });
+    const messages = await response.json();
+
+    if (!response.ok) {
+      box.textContent = messages.message || "Could not load messages.";
+      return;
+    }
+
+    box.replaceChildren();
+
+    if (messages.length === 0) {
+      box.textContent = "No buyer messages yet.";
+      return;
+    }
+
+    messages.forEach(item => {
+      const card = document.createElement("div");
+      card.style.cssText = "border:1px solid #ccc;padding:12px;margin:10px 0;border-radius:8px";
+
+      const title = document.createElement("h3");
+      title.textContent = item.listingTitle || "Machine Inquiry";
+
+      const buyer = document.createElement("p");
+      buyer.textContent = "Buyer: " + item.buyerName;
+
+      const message = document.createElement("p");
+      message.textContent = "Message: " + item.message;
+
+      const date = document.createElement("p");
+      date.textContent = "Date: " + new Date(item.createdAt).toLocaleString();
+
+      card.append(title, buyer, message, date);
+      box.appendChild(card);
+    });
+  } catch (error) {
+    box.textContent = "Server connection failed.";
+  }
+}
+
+async function registerUser() {
+  const getValue = (id) =>
+    document.getElementById(id).value.trim();
+
+  const name = getValue("regName");
+  const phone = getValue("regPhone");
+  const password = document.getElementById("regPassword").value;
+  const role = getValue("regRole");
+
+  const payload = {
+    name,
+    phone,
+    password,
+    role,
+    companyName: getValue("regCompanyName"),
+    businessType: getValue("regBusinessType"),
+    businessIdentity: getValue("regBusinessIdentity"),
+    businessSector: getValue("regBusinessSector"),
+    country: getValue("regCountry"),
+    state: getValue("regState"),
+    city: getValue("regCity"),
+    whatsapp: getValue("regWhatsapp"),
+    email: getValue("regEmail"),
+    gstin: getValue("regGstin"),
+    iec: getValue("regIec"),
+    website: getValue("regWebsite")
+  };
+
+  const msg = document.getElementById("regMessage");
+  msg.textContent = "Please wait...";
+
+  try {
+    const response = await fetch("/api/register", {
+      method: "POST",
+      credentials: "same-origin",
+      headers: {"Content-Type": "application/json"},
+      body: JSON.stringify(payload)
+    });
+
+    const data = await response.json();
+    msg.textContent = data.message || "Registration failed";
+
+    if (response.ok) {
+      msg.textContent = "Company registration successful. You are logged in.";
+    }
+  } catch (error) {
+    msg.textContent = "Server connection failed";
+  }
+}
+
+async function loginUser() {
+  const phone = document.getElementById("loginPhone").value.trim();
+  const password = document.getElementById("loginPassword").value;
+  const msg = document.getElementById("loginMessage");
+
+  msg.textContent = "Please wait...";
+
+  try {
+    const response = await fetch("/api/login", {
+      method: "POST",
+      credentials: "same-origin",
+      headers: {"Content-Type": "application/json"},
+      body: JSON.stringify({phone, password})
+    });
+
+    const data = await response.json();
+    msg.textContent = data.message || "Login failed";
+
+    if (response.ok) {
+      const check = await fetch("/api/me", {
+        credentials: "same-origin"
+      });
+      const sessionData = await check.json();
+      msg.textContent = check.ok
+        ? "Login successful - Role: " + sessionData.user.role
+        : "Login successful, but session not saved";
+    }
+
+    if (response.ok) {
+      const role = data.user.role;
+
+      const adminPanel = document.getElementById("adminPanel");
+      const sellerInbox = document.getElementById("sellerInbox");
+
+      adminPanel.style.display = role === "admin" ? "block" : "none";
+      sellerInbox.style.display = role === "seller" ? "block" : "none";
+
+      if (role === "admin") {
+        await loadAdminListings();
+        await loadAdminSellers();
+        await loadAdminInquiries();
+        await loadAdminWallet();
+        await loadAdminGovernmentRequest();
+      }
+
+      if (role === "seller") {
+        await loadSellerInquiries();
+      }
+    }
+  } catch (error) {
+    msg.textContent = "Server connection failed";
+  }
+}
+
+
+async function loadAdminInquiries() {
+  const box = document.getElementById("adminInquiries");
+  box.textContent = "Loading inquiries...";
+
+  try {
+    const response = await fetch("/api/admin/inquiries", {
+      credentials: "same-origin"
+    });
+    const inquiries = await response.json();
+
+    if (!response.ok) {
+      box.textContent = inquiries.message || "Could not load inquiries";
+      return;
+    }
+
+    box.replaceChildren();
+
+    if (!Array.isArray(inquiries) || inquiries.length === 0) {
+      box.textContent = "No buyer inquiries found.";
+      return;
+    }
+
+    inquiries.forEach(item => {
+      const card = document.createElement("div");
+      card.style.cssText =
+        "border:1px solid #dbe4ee;padding:12px;margin:10px 0;border-radius:8px";
+
+      const details = document.createElement("p");
+      details.textContent =
+        "Buyer: " + (item.buyerName || "N/A") +
+        " | Machine: " + (item.listingTitle || "N/A") +
+        " | Seller ID: " + (item.sellerId || "N/A") +
+        " | Status: " + (item.status || "N/A");
+      card.appendChild(details);
+
+      const message = document.createElement("p");
+      message.textContent = "Message: " + (item.message || "No message");
+      card.appendChild(message);
+
+      const date = document.createElement("p");
+      date.textContent = "Date: " +
+        (item.createdAt ? new Date(item.createdAt).toLocaleString() : "N/A");
+      card.appendChild(date);
+
+      const statusLabel = document.createElement("label");
+      statusLabel.textContent = "Update Status: ";
+      const statusSelect = document.createElement("select");
+
+      ["new", "contacted", "closed"].forEach(status => {
+        const option = document.createElement("option");
+        option.value = status;
+        option.textContent = status.toUpperCase();
+        statusSelect.appendChild(option);
+      });
+
+      statusSelect.value = ["new", "contacted", "closed"].includes(item.status)
+        ? item.status
+        : "new";
+
+      statusSelect.addEventListener("change", () => {
+        updateInquiryStatus(item.id, statusSelect.value);
+      });
+
+      statusLabel.appendChild(statusSelect);
+      card.appendChild(statusLabel);
+
+      box.appendChild(card);
+    });
+  } catch (error) {
+    box.textContent = "Server connection failed";
+  }
+}
+
+
+async function updateInquiryStatus(id, status) {
+  try {
+    const response = await fetch(
+      "/api/admin/inquiries/" + encodeURIComponent(id) + "/status",
+      {
+        method: "PATCH",
+        credentials: "same-origin",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ status })
+      }
+    );
+
+    const result = await response.json();
+
+    if (!response.ok) {
+      alert(result.message || "Status update failed");
+      await loadAdminInquiries();
+      return;
+    }
+
+    alert("Inquiry status updated: " + status.toUpperCase());
+    await loadAdminInquiries();
+  } catch (error) {
+    alert("Server connection failed");
+  }
+}
+
+
+
+
+async function loadAdminGovernmentRequest() {
+  const box = document.getElementById("adminGovernmentRequest");
+  box.textContent = "Loading confidential request...";
+
+  try {
+    const response = await fetch("/api/admin/government-assistance", {
+      credentials: "same-origin",
+      cache: "no-store"
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      box.textContent = "Admin access required.";
+      return;
+    }
+
+    box.textContent =
+      data.title + "\n" +
+      "Visibility: " + data.visibility + "\n" +
+      "Status: " + data.status + "\n\n" +
+      data.request.join("\n\n") + "\n\n" +
+      data.note;
+  } catch (error) {
+    box.textContent = "Could not load confidential request.";
+  }
+}
+
+async function loadAdminWallet() {
+  const box = document.getElementById("adminWallet");
+  box.textContent = "Loading commission wallet...";
+
+  try {
+    const response = await fetch("/api/admin/commission-wallet", {
+      credentials: "same-origin"
+    });
+    const data = await response.json();
+
+    if (!response.ok) {
+      box.textContent = data.message || "Could not load wallet";
+      return;
+    }
+
+    box.replaceChildren();
+
+    const note = document.createElement("p");
+    note.textContent = data.note || "Ledger records only. Funds are not held here.";
+    box.appendChild(note);
+
+    if (!Array.isArray(data.summary) || data.summary.length === 0) {
+      const empty = document.createElement("p");
+      empty.textContent = "No commission ledger entries yet.";
+      box.appendChild(empty);
+    } else {
+      data.summary.forEach(item => {
+        const card = document.createElement("div");
+        card.style.cssText = "border:1px solid #dbe4ee;padding:12px;margin:10px 0;border-radius:8px";
+
+        const heading = document.createElement("h4");
+        heading.textContent = "Currency: " + item.currency;
+        card.appendChild(heading);
+
+        const details = document.createElement("p");
+        details.textContent =
+          "Confirmed sales: " + item.confirmed_sales + " " + item.currency +
+          " | Confirmed commission (3%): " + item.confirmed_commission + " " + item.currency +
+          " | Pending sales: " + item.pending_sales + " " + item.currency +
+          " | Pending commission: " + item.pending_commission + " " + item.currency +
+          " | Confirmed entries: " + item.confirmed_count +
+          " | Pending entries: " + item.pending_count;
+        card.appendChild(details);
+        box.appendChild(card);
+      });
+    }
+
+    const withdrawal = document.createElement("p");
+    withdrawal.textContent = "Withdrawal status: " +
+      (data.withdrawalEnabled ? "Enabled" : "Disabled - payment gateway approval and settlement setup required.");
+    box.appendChild(withdrawal);
+
+    const entriesTitle = document.createElement("h4");
+    entriesTitle.textContent = "Latest Ledger Entries";
+    box.appendChild(entriesTitle);
+
+    if (!Array.isArray(data.entries) || data.entries.length === 0) {
+      const emptyEntries = document.createElement("p");
+      emptyEntries.textContent = "No entries recorded.";
+      box.appendChild(emptyEntries);
+    } else {
+      data.entries.forEach(item => {
+        const row = document.createElement("p");
+        row.textContent =
+          "Order: " + item.order_reference +
+          " | Seller ID: " + item.seller_id +
+          " | Sale: " + item.gross_amount + " " + item.currency +
+          " | Commission: " + item.commission_amount + " " + item.currency +
+          " | Status: " + item.status;
+        box.appendChild(row);
+      });
+    }
+  } catch (error) {
+    box.textContent = "Server connection failed";
+  }
+}
+
+async function loadAdminSellers() {
+  const box = document.getElementById("adminSellers");
+  box.textContent = "Loading sellers...";
+
+  try {
+    const response = await fetch("/api/admin/sellers", {
+      credentials: "same-origin"
+    });
+    const sellers = await response.json();
+
+    if (!response.ok) {
+      box.textContent = sellers.message || "Admin access required";
+      return;
+    }
+
+    box.replaceChildren();
+
+    if (sellers.length === 0) {
+      box.textContent = "No sellers registered.";
+      return;
+    }
+
+    sellers.forEach(seller => {
+      const card = document.createElement("div");
+      card.style.cssText = "border:1px solid #dbe4ee;padding:12px;margin:10px 0;border-radius:8px";
+
+      const name = document.createElement("p");
+      name.textContent = "Seller: " + seller.name;
+      card.appendChild(name);
+
+      const status = document.createElement("p");
+      status.textContent = seller.verified ? "Verified Seller" : "Not Verified";
+      status.style.color = seller.verified ? "green" : "#b45309";
+      card.appendChild(status);
+
+      const button = document.createElement("button");
+      button.textContent = seller.verified ? "Remove Verification" : "Verify Seller";
+      button.onclick = () => updateSellerVerification(seller.id, !seller.verified);
+      card.appendChild(button);
+
+      box.appendChild(card);
+    });
+  } catch (error) {
+    box.textContent = "Could not load sellers.";
+  }
+}
+
+async function updateSellerVerification(id, verified) {
+  const action = verified ? "verify" : "remove verification from";
+  if (!confirm("Are you sure you want to " + action + " this seller?")) return;
+
+  try {
+    const response = await fetch("/api/admin/sellers/" + encodeURIComponent(id) + "/verification", {
+      method: "PATCH",
+      credentials: "same-origin",
+      headers: {"Content-Type": "application/json"},
+      body: JSON.stringify({verified})
+    });
+
+    const data = await response.json();
+    alert(data.message || "Request failed");
+
+    if (response.ok) await loadAdminSellers();
+  } catch (error) {
+    alert("Server connection failed");
+  }
+}
+
+async function loadAdminListings() {
+  const box = document.getElementById("adminListings");
+  box.textContent = "Loading listings...";
+
+  try {
+    const response = await fetch("/api/admin/listings");
+    const listings = await response.json();
+
+    if (!response.ok) {
+      box.textContent = listings.message || "Admin access required";
+      return;
+    }
+
+    box.replaceChildren();
+
+    if (listings.length === 0) {
+      box.textContent = "No machine listings found.";
+      return;
+    }
+
+    listings.forEach(item => {
+      const card = document.createElement("div");
+      card.style.border = "1px solid #ccc";
+      card.style.padding = "12px";
+      card.style.margin = "12px 0";
+      card.style.borderRadius = "8px";
+
+      const details = document.createElement("p");
+      details.textContent =
+        "Machine: " + item.title +
+        " | Category: " + item.category +
+        " | Price: " + item.price + " " + item.currency +
+        " | Seller: " + item.sellerName +
+        " | Status: " + item.status;
+
+      card.appendChild(details);
+
+      if (item.description) {
+        const description = document.createElement("p");
+        description.textContent = item.description;
+        card.appendChild(description);
+      }
+
+      if (item.status === "pending") {
+        ["approved", "rejected"].forEach(status => {
+          const button = document.createElement("button");
+          button.textContent = status === "approved" ? "Approve" : "Reject";
+          button.style.marginRight = "8px";
+          button.onclick = () => updateListingStatus(item.id, status);
+          card.appendChild(button);
+        });
+      }
+
+      box.appendChild(card);
+    });
+  } catch (error) {
+    box.textContent = "Could not load listings.";
+  }
+}
+
+async function updateListingStatus(id, status) {
+  if (!confirm("Are you sure you want to " + status + " this listing?")) {
+    return;
+  }
+
+  try {
+    const response = await fetch("/api/admin/listings/" + encodeURIComponent(id) + "/status", {
+      method: "PATCH",
+      headers: {"Content-Type": "application/json"},
+      body: JSON.stringify({status})
+    });
+
+    const data = await response.json();
+    alert(data.message || "Request failed");
+
+    if (response.ok) {
+      await loadAdminListings();
+    }
+  } catch (error) {
+    alert("Server connection failed");
+  }
+}
+
+async function logoutUser() {
+  try {
+    const response = await fetch("/api/logout", {method: "POST"});
+    const data = await response.json();
+    document.getElementById("adminPanel").style.display = "none";
+    document.getElementById("loginMessage").textContent = data.message;
+  } catch (error) {
+    document.getElementById("loginMessage").textContent = "Logout failed";
+  }
+}
+
+
+async function publishMachine() {
+  const msg = document.getElementById("publishMessage");
+  const files = document.getElementById("machineMedia").files;
+
+  if (files.length > 5) {
+    msg.textContent = "Maximum 5 photos/videos allowed";
+    return;
+  }
+
+  const form = new FormData();
+  form.append("title", document.getElementById("machineTitle").value.trim());
+  form.append("category", document.getElementById("machineCategory").value);
+  form.append("price", document.getElementById("machinePrice").value);
+  form.append("currency", document.getElementById("machineCurrency").value);
+  form.append("country", document.getElementById("machineCountry").value.trim());
+  form.append("state", document.getElementById("machineState").value.trim());
+  form.append("city", document.getElementById("machineCity").value.trim());
+  form.append("description", document.getElementById("machineDescription").value);
+
+  for (const file of files) {
+    form.append("media", file);
+  }
+
+  msg.textContent = "Uploading...";
+
+  try {
+    const response = await fetch("/api/listings", {
+      method: "POST",
+      credentials: "same-origin",
+      body: form
+    });
+
+    const data = await response.json();
+    msg.textContent = data.message || "Upload failed";
+
+    if (response.ok) {
+      document.getElementById("machineTitle").value = "";
+      document.getElementById("machineCategory").value = "";
+      document.getElementById("machinePrice").value = "";
+      document.getElementById("machineCountry").value = "";
+      document.getElementById("machineState").value = "";
+      document.getElementById("machineCity").value = "";
+      document.getElementById("machineDescription").value = "";
+      document.getElementById("machineMedia").value = "";
+    }
+  } catch (error) {
+    msg.textContent = "Server connection failed";
+  }
+}
+
+
+loadApprovedListings();
+</script>
+
+
+
+<section id="travel-portal" style="padding:25px 16px;margin:25px auto;max-width:1100px;background:#f4f7fb;border-radius:14px;">
+  <h2 style="text-align:center;color:#12345a;">BIHARI MART – Travel & Booking</h2>
+  <p style="text-align:center;">Railway, Airways, Hotels aur Bus Booking Services</p>
+
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:16px;">
+
+    <div style="background:white;padding:20px;border-radius:12px;">
+      <h3>🚆 Railway Services</h3>
+      <p>Train ticket, PNR aur train running status.</p>
+      <p><a href="https://www.irctc.co.in/nget/train-search" target="_blank" rel="noopener noreferrer">IRCTC – Train Booking</a></p>
+      <p><a href="https://www.indianrail.gov.in/" target="_blank" rel="noopener noreferrer">Indian Railways Enquiry</a></p>
+      <p><a href="https://enquiry.indianrail.gov.in/ntes/" target="_blank" rel="noopener noreferrer">NTES – Train Status</a></p>
+    </div>
+
+    <div style="background:white;padding:20px;border-radius:12px;">
+      <h3>✈️ Airways Services</h3>
+      <p>Domestic aur international flight booking.</p>
+      <p><a href="https://www.air.irctc.co.in/" target="_blank" rel="noopener noreferrer">IRCTC Air</a></p>
+      <p><a href="https://www.airindia.com/in/en/book.html" target="_blank" rel="noopener noreferrer">Air India Booking</a></p>
+      <p><a href="https://www.goindigo.in/" target="_blank" rel="noopener noreferrer">IndiGo Booking</a></p>
+    </div>
+
+    <div style="background:white;padding:20px;border-radius:12px;">
+      <h3>🏨 Hotel Booking</h3>
+      <p>India aur worldwide hotels search aur booking.</p>
+      <p><a href="https://www.makemytrip.com/hotels/" target="_blank" rel="noopener noreferrer">MakeMyTrip – Hotel Booking</a></p>
+    </div>
+
+    <div style="background:white;padding:20px;border-radius:12px;">
+      <h3>🚌 Bus Booking</h3>
+      <p>Intercity aur long-distance bus tickets.</p>
+      <p><a href="https://www.redbus.in/" target="_blank" rel="noopener noreferrer">redBus – Bus Booking</a></p>
+    </div>
+
+  </div>
+
+  <p style="text-align:center;margin-top:20px;color:#555;">
+    Future Plan: BIHARI MART apni authorised booking service shuru karne ki taiyari karega.
+  </p>
+</section>
+
+
+
+
+<section id="government-services" style="padding:25px 16px;margin:25px auto;max-width:1100px;background:#f4f7fb;border-radius:14px;">
+  <h2 style="text-align:center;color:#12345a;">🌍 BIHARI MART – Government & Online Services</h2>
+  <p style="text-align:center;">Government applications, certificates, driving licence and online assistance.</p>
+
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px;">
+
+    <div style="background:white;padding:18px;border-radius:12px;">
+      <h3>💼 Government Job Apply</h3>
+      <p>भारत की सरकारी नौकरियों और अंतरराष्ट्रीय सार्वजनिक संस्थानों की नौकरी की जानकारी व आवेदन सहायता।</p>
+      <a href="https://www.ncs.gov.in/" target="_blank" rel="noopener noreferrer">National Career Service – India</a><br>
+      <a href="https://careers.un.org/" target="_blank" rel="noopener noreferrer">United Nations Careers</a>
+    </div>
+
+    <div style="background:white;padding:18px;border-radius:12px;">
+      <h3>🪪 Caste Certificate</h3>
+      <p>जाति प्रमाणपत्र के आवेदन और जरूरी दस्तावेजों की जानकारी।</p>
+      <a href="https://services.india.gov.in/" target="_blank" rel="noopener noreferrer">National Government Services Portal</a>
+    </div>
+
+    <div style="background:white;padding:18px;border-radius:12px;">
+      <h3>🏠 Residential Certificate</h3>
+      <p>आवासीय / निवास प्रमाणपत्र के आवेदन में सहायता।</p>
+      <a href="https://services.india.gov.in/" target="_blank" rel="noopener noreferrer">Government Services Portal</a>
+    </div>
+
+    <div style="background:white;padding:18px;border-radius:12px;">
+      <h3>💰 Income Certificate</h3>
+      <p>आय प्रमाणपत्र के आवेदन और प्रक्रिया की जानकारी।</p>
+      <a href="https://services.india.gov.in/" target="_blank" rel="noopener noreferrer">Government Services Portal</a>
+    </div>
+
+    <div style="background:white;padding:18px;border-radius:12px;">
+      <h3>📊 Income Tax & ITR</h3>
+      <p>Income Tax Return भरने और टैक्स संबंधी जानकारी में सहायता।</p>
+      <a href="https://www.incometax.gov.in/" target="_blank" rel="noopener noreferrer">Official Income Tax e-Filing Portal</a>
+    </div>
+
+    <div style="background:white;padding:18px;border-radius:12px;">
+      <h3>🚗 Driving Licence Services</h3>
+      <p>Learner Licence, Permanent Licence, Renewal, Duplicate Licence, Address Change और IDP की जानकारी।</p>
+      <a href="https://sarathi.parivahan.gov.in/" target="_blank" rel="noopener noreferrer">Official Sarathi Parivahan Portal</a>
+    </div>
+
+    <div style="background:white;padding:18px;border-radius:12px;">
+      <h3>📜 Janampatri</h3>
+      <p>जन्म विवरण के आधार पर जन्मपत्री बनवाने की सेवा।</p>
+      <p>Service availability: Coming Soon</p>
+    </div>
+
+  </div>
+
+  <p style="text-align:center;margin-top:20px;color:#555;">
+    BIHARI MART आवेदन प्रक्रिया और दस्तावेजों की जानकारी में सहायता करेगा। प्रमाणपत्र और लाइसेंस संबंधित सरकारी विभाग ही जारी करेंगे। पात्रता, शुल्क और स्वीकृति सरकारी नियमों पर निर्भर होंगे। किसी को OTP या पासवर्ड न दें।
+  </p>
+</section>
+
+<section id="bank-directory" style="padding:25px 16px;margin:25px auto;max-width:1100px;background:#eef5ff;border-radius:14px;">
+  <h2 style="text-align:center;color:#12345a;">🌍 Worldwide Bank Directory</h2>
+  <p style="text-align:center;">Find official banks, verify regulated institutions and visit their official websites to check account-opening eligibility.</p>
+
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px;">
+    <div style="background:white;padding:18px;border-radius:12px;">
+      <h3>🇮🇳 India</h3>
+      <p>RBI की आधिकारिक बैंक सूची और बैंक वेबसाइटें।</p>
+      <a href="https://www.rbi.org.in/scripts/banklinks.aspx" target="_blank" rel="noopener noreferrer">Find Indian Banks</a>
+    </div>
+    <div style="background:white;padding:18px;border-radius:12px;">
+      <h3>🇺🇸 United States</h3>
+      <p>FDIC insured banks और उनकी जानकारी खोजें।</p>
+      <a href="https://banks.data.fdic.gov/bankfind-suite/bankfind" target="_blank" rel="noopener noreferrer">Find US Banks</a>
+    </div>
+    <div style="background:white;padding:18px;border-radius:12px;">
+      <h3>🇬🇧 United Kingdom</h3>
+      <p>FCA पर authorised financial firms की जाँच करें।</p>
+      <a href="https://www.fca.org.uk/firms/financial-services-register" target="_blank" rel="noopener noreferrer">Check UK Register</a>
+    </div>
+    <div style="background:white;padding:18px;border-radius:12px;">
+      <h3>🇦🇺 Australia</h3>
+      <p>APRA से authorised banks और deposit-taking institutions देखें।</p>
+      <a href="https://www.apra.gov.au/registers/list-registered-authorised-deposit-taking-institutions" target="_blank" rel="noopener noreferrer">Find Australian Banks</a>
+    </div>
+  </div>
+
+  <p style="margin-top:20px;text-align:center;">
+    <strong>Account Opening:</strong> चुने हुए बैंक की आधिकारिक वेबसाइट पर जाकर Savings, Current या Business Account की पात्रता और आवेदन प्रक्रिया देखें।
+  </p>
+  <p style="text-align:center;color:#555;">
+    BIHARI MART खाता खोलने की गारंटी नहीं देता। खाता खोलने, KYC, दस्तावेजों और स्वीकृति का निर्णय संबंधित बैंक करता है।
+    किसी को भी अपना OTP, PIN या बैंक पासवर्ड न दें।
+  </p>
+</section>
+
+
+
+<section id="passport-visa-directory" style="padding:25px 16px;margin:25px auto;max-width:1100px;background:#eef8f5;border-radius:14px;">
+  <h2 style="text-align:center;color:#12543e;">🌍 Worldwide Passport & Visa Directory</h2>
+  <p style="text-align:center;">Find official government passport, immigration and visa application websites around the world.</p>
+
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px;">
+
+    <div style="background:white;padding:18px;border-radius:12px;">
+      <h3>🇮🇳 India</h3>
+      <p>Passport application, renewal and status.</p>
+      <a href="https://www.passportindia.gov.in/" target="_blank" rel="noopener noreferrer">Official Passport Portal</a>
+      <p>Indian visa and e-Visa.</p>
+      <a href="https://indianvisaonline.gov.in/" target="_blank" rel="noopener noreferrer">Official Indian Visa Portal</a>
+    </div>
+
+    <div style="background:white;padding:18px;border-radius:12px;">
+      <h3>🇺🇸 United States</h3>
+      <p>US passport services.</p>
+      <a href="https://travel.state.gov/content/travel/en/passports.html" target="_blank" rel="noopener noreferrer">US Passport Services</a>
+      <p>Visa information and applications.</p>
+      <a href="https://travel.state.gov/content/travel/en/us-visas.html" target="_blank" rel="noopener noreferrer">US Visa Services</a>
+    </div>
+
+    <div style="background:white;padding:18px;border-radius:12px;">
+      <h3>🇬🇧 United Kingdom</h3>
+      <p>British passport services.</p>
+      <a href="https://www.gov.uk/browse/abroad/passports" target="_blank" rel="noopener noreferrer">UK Passport Services</a>
+      <p>UK visa and immigration.</p>
+      <a href="https://www.gov.uk/government/organisations/uk-visas-and-immigration" target="_blank" rel="noopener noreferrer">UK Visa & Immigration</a>
+    </div>
+
+    <div style="background:white;padding:18px;border-radius:12px;">
+      <h3>🇨🇦 Canada</h3>
+      <p>Canadian passport services.</p>
+      <a href="https://www.canada.ca/en/immigration-refugees-citizenship/services/canadian-passports.html" target="_blank" rel="noopener noreferrer">Canada Passport Services</a>
+      <p>Immigration and visa services.</p>
+      <a href="https://www.canada.ca/en/immigration-refugees-citizenship.html" target="_blank" rel="noopener noreferrer">Canada Immigration</a>
+    </div>
+
+    <div style="background:white;padding:18px;border-radius:12px;">
+      <h3>🇦🇺 Australia</h3>
+      <p>Australian passport services.</p>
+      <a href="https://www.passports.gov.au/" target="_blank" rel="noopener noreferrer">Australia Passport Portal</a>
+      <p>Visa and immigration.</p>
+      <a href="https://immi.homeaffairs.gov.au/" target="_blank" rel="noopener noreferrer">Australia Immigration Portal</a>
+    </div>
+
+    <div style="background:white;padding:18px;border-radius:12px;">
+      <h3>🇳🇿 New Zealand</h3>
+      <p>New Zealand passport services.</p>
+      <a href="https://www.passports.govt.nz/" target="_blank" rel="noopener noreferrer">NZ Passport Portal</a>
+      <p>Visa and immigration.</p>
+      <a href="https://www.immigration.govt.nz/" target="_blank" rel="noopener noreferrer">NZ Immigration Portal</a>
+    </div>
+
+    <div style="background:white;padding:18px;border-radius:12px;">
+      <h3>🇦🇪 UAE</h3>
+      <p>Emirates passport and identity services.</p>
+      <a href="https://icp.gov.ae/" target="_blank" rel="noopener noreferrer">UAE ICP Portal</a>
+      <p>Visa and entry information.</p>
+      <a href="https://u.ae/en/information-and-services/visa-and-emirates-id" target="_blank" rel="noopener noreferrer">UAE Visa Information</a>
+    </div>
+
+    <div style="background:white;padding:18px;border-radius:12px;">
+      <h3>🇸🇦 Saudi Arabia</h3>
+      <p>Saudi passport and visa services.</p>
+      <a href="https://www.moi.gov.sa/" target="_blank" rel="noopener noreferrer">Saudi Interior Ministry</a>
+      <p>Visa application services.</p>
+      <a href="https://visa.mofa.gov.sa/" target="_blank" rel="noopener noreferrer">Saudi Visa Portal</a>
+    </div>
+
+    <div style="background:white;padding:18px;border-radius:12px;">
+      <h3>🇯🇵 Japan</h3>
+      <p>Passport information.</p>
+      <a href="https://www.mofa.go.jp/" target="_blank" rel="noopener noreferrer">Japan Foreign Ministry</a>
+      <p>Visa information and requirements.</p>
+      <a href="https://www.mofa.go.jp/j_info/visit/visa/index.html" target="_blank" rel="noopener noreferrer">Japan Visa Information</a>
+    </div>
+
+    <div style="background:white;padding:18px;border-radius:12px;">
+      <h3>🇪🇺 European Union / Schengen</h3>
+      <p>European immigration information.</p>
+      <a href="https://home-affairs.ec.europa.eu/policies/migration-and-asylum/eu-immigration-portal_en" target="_blank" rel="noopener noreferrer">EU Immigration Portal</a>
+      <p>Schengen visa information.</p>
+      <a href="https://home-affairs.ec.europa.eu/policies/schengen-borders-and-visa/visa-policy_en" target="_blank" rel="noopener noreferrer">EU Visa Policy</a>
+    </div>
+
+  </div>
+
+  <div style="background:white;padding:18px;border-radius:12px;margin-top:18px;">
+    <h3>🏛️ Worldwide Embassies & Consulates</h3>
+    <p>Find official country embassy and consular information.</p>
+    <a href="https://www.embassypages.com/" target="_blank" rel="noopener noreferrer">Embassy Directory (Independent Directory)</a>
+    <p>For verified government information, also visit the destination country's official Foreign Affairs Ministry website.</p>
+  </div>
+
+  <p style="text-align:center;margin-top:20px;color:#555;">
+    BIHARI MART provides links and general application information only. Passport and visa approval is decided exclusively by the relevant government. Fees, eligibility, documents and processing times vary by country. Always verify the website before paying. Never share OTPs or passwords.
+  </p>
+</section>
+
+<section id="emergency-help" style="padding:25px 16px;margin:25px auto;max-width:1100px;background:#fff4f2;border-radius:14px;">
+<h2 style="text-align:center;color:#a32121;">🚨 Emergency Help – India</h2>
+<p style="text-align:center;">Important emergency numbers. Tap to call for assistance.</p>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:14px;">
+<div style="background:white;padding:16px;border-radius:10px;"><h3>🚨 Emergency</h3><a href="tel:112">Call 112</a></div>
+<div style="background:white;padding:16px;border-radius:10px;"><h3>🚑 Ambulance</h3><a href="tel:102">Call 102</a></div>
+<div style="background:white;padding:16px;border-radius:10px;"><h3>👮 Police</h3><a href="tel:100">Call 100</a> / <a href="tel:112">112</a></div>
+<div style="background:white;padding:16px;border-radius:10px;"><h3>🚒 Fire Brigade</h3><a href="tel:101">Call 101</a></div>
+<div style="background:white;padding:16px;border-radius:10px;"><h3>👩 Women Helpline</h3><a href="tel:181">Call 181</a></div>
+<div style="background:white;padding:16px;border-radius:10px;"><h3>🧒 Child Helpline</h3><a href="tel:1098">Call 1098</a></div>
+<div style="background:white;padding:16px;border-radius:10px;"><h3>💻 Cyber Crime</h3><a href="tel:1930">Call 1930</a><p><a href="https://cybercrime.gov.in/" target="_blank" rel="noopener noreferrer">Cyber Crime Portal</a></p></div>
+<div style="background:white;padding:16px;border-radius:10px;"><h3>🚆 Railway Help</h3><a href="tel:139">Call 139</a></div>
+<div style="background:white;padding:16px;border-radius:10px;"><h3>🔥 LPG Gas Leak</h3><a href="tel:1906">Call 1906</a></div>
+<div style="background:white;padding:16px;border-radius:10px;"><h3>👴 Senior Citizens</h3><a href="tel:14567">Call 14567</a></div>
+<div style="background:white;padding:16px;border-radius:10px;"><h3>🧳 Tourist Helpline</h3><a href="tel:1363">Call 1363</a></div>
+<div style="background:white;padding:16px;border-radius:10px;"><h3>🏥 Find Nearby Hospital</h3><a href="https://www.google.com/maps/search/hospitals+near+me/" target="_blank" rel="noopener noreferrer">Find Hospitals</a></div>
+</div>
+<p style="text-align:center;margin-top:18px;">For immediate danger, call 112. BIHARI MART is not an emergency response agency. Numbers and availability may vary by location.</p>
+<p style="text-align:center;"><a href="https://www.india.gov.in/directory/helpline" target="_blank" rel="noopener noreferrer">Official Government Helpline Directory</a></p>
+</section>
+
+</body>
+</html>

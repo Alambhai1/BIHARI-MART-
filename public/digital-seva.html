@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#073b78">
+<title>BIHARI MART | Digital Seva</title>
+<style>
+:root{--blue:#0755a5;--dark:#082c55;--gold:#ffb928;--bg:#f3f7fc}
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,sans-serif;background:var(--bg);color:#18334f}
+header{background:linear-gradient(120deg,#062d60,#0876cb);color:white;padding:17px 5%;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.logo{font-size:23px;font-weight:900;letter-spacing:1px}
+.logo span{color:var(--gold)}
+nav{display:flex;gap:17px;flex-wrap:wrap}
+nav a{color:white;text-decoration:none;font-size:14px}
+button,.btn{border:0;border-radius:9px;padding:11px 16px;font-weight:bold;cursor:pointer}
+.lang{background:white;color:#0755a5}
+.hero{background:linear-gradient(120deg,#07346b,#087acb);color:white;text-align:center;padding:65px 18px 75px}
+.hero h1{font-size:clamp(29px,5vw,48px);margin:0 0 15px}
+.hero p{font-size:17px;line-height:1.7;max-width:700px;margin:0 auto 25px}
+.search{display:flex;max-width:650px;margin:auto;background:white;padding:6px;border-radius:12px}
+.search input{flex:1;min-width:0;border:0;outline:0;padding:12px;font-size:15px}
+.search button{background:var(--gold);color:#173453}
+.container{max-width:1150px;margin:35px auto;padding:0 17px}
+.heading{text-align:center;margin-bottom:25px}
+.heading h2{color:var(--dark);font-size:28px;margin-bottom:8px}
+.heading p{color:#62758b}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(155px,1fr));gap:15px}
+.service{background:white;border:1px solid #e4ebf3;border-radius:15px;padding:23px 12px;text-align:center;box-shadow:0 4px 14px #153e6610;transition:.2s;cursor:pointer}
+.service:hover{transform:translateY(-4px);border-color:#1784d5}
+.service .ico{font-size:32px;margin-bottom:12px}
+.service h3{font-size:15px;margin:0 0 7px;color:#123c68}
+.service p{font-size:12px;color:#718197;margin:0;line-height:1.5}
+.service button{margin-top:13px;background:#e9f3ff;color:#0755a5;font-size:12px}
+.info{background:white;border-radius:16px;padding:25px;margin-top:30px;line-height:1.7}
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:15px}
+.step{background:#edf5ff;padding:20px;border-radius:12px}
+.step b{color:#0755a5}
+.cta{background:linear-gradient(120deg,#07346b,#087acb);color:white;text-align:center;border-radius:18px;padding:35px 15px;margin-top:30px}
+.cta button{background:var(--gold);color:#173453;margin:7px}
+footer{background:#071f3e;color:#d9e8fa;text-align:center;padding:28px 15px;margin-top:40px;font-size:13px}
+footer a{color:#ffca55;text-decoration:none}
+.hidden{display:none!important}
+@media(max-width:600px){header{justify-content:center;text-align:center}nav{justify-content:center}.hero{padding:45px 14px}.grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+</style>
+<link rel="stylesheet" href="/brand.css">
+</head>
+<body>
+<header>
+<div class="logo">BIHARI <span>MART</span></div>
+<nav>
+<a href="/">Home</a><a href="#services" data-en="Services" data-hi="सेवाएँ">Services</a>
+<a href="#how" data-en="How It Works" data-hi="कैसे काम करता है">How It Works</a>
+<a href="#contact" data-en="Contact" data-hi="संपर्क">Contact</a>
+</nav>
+<button class="lang" onclick="toggleLang()">हिंदी / English</button>
+</header>
+
+<section class="hero">
+<h1 data-en="BIHARI MART DIGITAL SEVA" data-hi="बिहारी मार्ट डिजिटल सेवा">BIHARI MART DIGITAL SEVA</h1>
+<p data-en="One World, One Platform. Explore digital, government and everyday services from one convenient platform." data-hi="एक दुनिया, एक प्लेटफॉर्म। डिजिटल, सरकारी और रोजमर्रा की सेवाएँ एक ही जगह पर पाएँ।">One World, One Platform. Explore digital, government and everyday services from one convenient platform.</p>
+<div class="search">
+<input id="search" placeholder="Search services..." oninput="filterServices()">
+<button onclick="filterServices()" data-en="Search" data-hi="खोजें">Search</button>
+</div>
+</section>
+
+<main class="container" id="services">
+<div class="heading">
+<h2 data-en="Our Digital Services" data-hi="हमारी डिजिटल सेवाएँ">Our Digital Services</h2>
+<p data-en="Your trusted destination for online services" data-hi="ऑनलाइन सेवाओं के लिए आपका डिजिटल प्लेटफॉर्म">Your trusted destination for online services</p>
+</div>
+<div class="grid" id="serviceGrid">
+<div class="service" data-name="kyc केवाईसी"><div class="ico">🪪</div><h3 data-en="KYC Services" data-hi="केवाईसी सेवाएँ">KYC Services</h3><p data-en="Identity verification" data-hi="पहचान सत्यापन">Identity verification</p><button onclick="serviceInfo('KYC Services','केवाईसी सेवाएँ')">Explore</button></div>
+<div class="service" data-name="pan card पैन कार्ड"><div class="ico">💳</div><h3 data-en="PAN Card" data-hi="पैन कार्ड">PAN Card</h3><p data-en="PAN related assistance" data-hi="पैन संबंधित सहायता">PAN related assistance</p><button onclick="serviceInfo('PAN Card','पैन कार्ड')">Explore</button></div>
+<div class="service" data-name="aadhaar आधार"><div class="ico">🆔</div><h3 data-en="Aadhaar Services" data-hi="आधार सेवाएँ">Aadhaar Services</h3><p data-en="Authorized Aadhaar assistance" data-hi="अधिकृत आधार सहायता">Authorized Aadhaar assistance</p><button onclick="serviceInfo('Aadhaar Services','आधार सेवाएँ')">Explore</button></div>
+<div class="service" data-name="government jobs सरकारी नौकरी"><div class="ico">💼</div><h3 data-en="Government Jobs" data-hi="सरकारी नौकरी">Government Jobs</h3><p data-en="Job information and applications" data-hi="नौकरी जानकारी और आवेदन">Job information and applications</p><button onclick="serviceInfo('Government Jobs','सरकारी नौकरी')">Explore</button></div>
+<div class="service" data-name="caste जाति certificate प्रमाणपत्र"><div class="ico">📜</div><h3 data-en="Caste Certificate" data-hi="जाति प्रमाणपत्र">Caste Certificate</h3><p data-en="Certificate application assistance" data-hi="प्रमाणपत्र आवेदन सहायता">Certificate application assistance</p><button onclick="serviceInfo('Caste Certificate','जाति प्रमाणपत्र')">Explore</button></div>
+<div class="service" data-name="residential आवासीय"><div class="ico">🏠</div><h3 data-en="Residential Certificate" data-hi="आवासीय प्रमाणपत्र">Residential Certificate</h3><p data-en="Residence certificate assistance" data-hi="निवास प्रमाणपत्र सहायता">Residence certificate assistance</p><button onclick="serviceInfo('Residential Certificate','आवासीय प्रमाणपत्र')">Explore</button></div>
+<div class="service" data-name="birth जन्म certificate"><div class="ico">👶</div><h3 data-en="Birth Certificate" data-hi="जन्म प्रमाणपत्र">Birth Certificate</h3><p data-en="Birth record assistance" data-hi="जन्म रिकॉर्ड सहायता">Birth record assistance</p><button onclick="serviceInfo('Birth Certificate','जन्म प्रमाणपत्र')">Explore</button></div>
+<div class="service" data-name="vehicle challan चालान"><div class="ico">🚗</div><h3 data-en="Vehicle Challan" data-hi="वाहन चालान">Vehicle Challan</h3><p data-en="Check and pay challans" data-hi="चालान जाँच और भुगतान">Check and pay challans</p><button onclick="serviceInfo('Vehicle Challan','वाहन चालान')">Explore</button></div>
+<div class="service" data-name="insurance बीमा"><div class="ico">🛡️</div><h3 data-en="Insurance" data-hi="बीमा">Insurance</h3><p data-en="Insurance service assistance" data-hi="बीमा सेवा सहायता">Insurance service assistance</p><button onclick="serviceInfo('Insurance','बीमा')">Explore</button></div>
+<div class="service" data-name="emi loan किस्त लोन"><div class="ico">🏦</div><h3 data-en="EMI & Loan" data-hi="ईएमआई और लोन">EMI & Loan</h3><p data-en="Authorized payment services" data-hi="अधिकृत भुगतान सेवाएँ">Authorized payment services</p><button onclick="serviceInfo('EMI & Loan','ईएमआई और लोन')">Explore</button></div>
+<div class="service" data-name="bill payment बिजली बिल"><div class="ico">🧾</div><h3 data-en="Bill Payment" data-hi="बिल भुगतान">Bill Payment</h3><p data-en="Utility bill payment assistance" data-hi="उपयोगिता बिल भुगतान सहायता">Utility bill payment assistance</p><button onclick="serviceInfo('Bill Payment','बिल भुगतान')">Explore</button></div>
+<div class="service" data-name="ticket booking टिकट"><div class="ico">🎫</div><h3 data-en="Ticket Booking" data-hi="टिकट बुकिंग">Ticket Booking</h3><p data-en="Travel booking assistance" data-hi="यात्रा टिकट सहायता">Travel booking assistance</p><button onclick="serviceInfo('Ticket Booking','टिकट बुकिंग')">Explore</button></div>
+<div class="service" data-name="banking बैंकिंग"><div class="ico">🏛️</div><h3 data-en="Banking Services" data-hi="बैंकिंग सेवाएँ">Banking Services</h3><p data-en="Authorized banking services" data-hi="अधिकृत बैंकिंग सेवाएँ">Authorized banking services</p><button onclick="serviceInfo('Banking Services','बैंकिंग सेवाएँ')">Explore</button></div>
+<div class="service" data-name="janampatri जन्मपत्री"><div class="ico">📖</div><h3 data-en="Janam Patri" data-hi="जन्मपत्री">Janam Patri</h3><p data-en="Birth chart service" data-hi="जन्म कुंडली सेवा">Birth chart service</p><button onclick="serviceInfo('Janam Patri','जन्मपत्री')">Explore</button></div>
+<div class="service" data-name="other services अन्य सेवाएँ"><div class="ico">🌐</div><h3 data-en="More Services" data-hi="अन्य सेवाएँ">More Services</h3><p data-en="More services coming soon" data-hi="और सेवाएँ जल्द आएँगी">More services coming soon</p><button onclick="serviceInfo('More Services','अन्य सेवाएँ')">Explore</button></div>
+</div>
+
+<section class="info" id="how">
+<div class="heading"><h2 data-en="How It Works" data-hi="यह कैसे काम करता है">How It Works</h2></div>
+<div class="steps">
+<div class="step">① <b data-en="Choose Service" data-hi="सेवा चुनें">Choose Service</b><p data-en="Select your required service." data-hi="अपनी जरूरी सेवा चुनें।">Select your required service.</p></div>
+<div class="step">② <b data-en="Register / Login" data-hi="रजिस्टर / लॉगिन">Register / Login</b><p data-en="Create an account securely." data-hi="सुरक्षित अकाउंट बनाएँ।">Create an account securely.</p></div>
+<div class="step">③ <b data-en="Complete Verification" data-hi="सत्यापन पूरा करें">Complete Verification</b><p data-en="Follow authorized verification steps." data-hi="अधिकृत सत्यापन प्रक्रिया पूरी करें।">Follow authorized verification steps.</p></div>
+<div class="step">④ <b data-en="Get Service" data-hi="सेवा प्राप्त करें">Get Service</b><p data-en="Track your request and status." data-hi="अपने आवेदन और स्थिति को देखें।">Track your request and status.</p></div>
+</div>
+</section>
+
+<section class="cta" id="contact">
+<h2 data-en="Welcome to BIHARI MART Digital Seva" data-hi="BIHARI MART डिजिटल सेवा में आपका स्वागत है">Welcome to BIHARI MART Digital Seva</h2>
+<p data-en="One platform for convenient digital services." data-hi="सुविधाजनक डिजिटल सेवाओं के लिए एक प्लेटफॉर्म।">One platform for convenient digital services.</p>
+<button onclick="location.href='/#login'" data-en="Login / Register" data-hi="लॉगिन / रजिस्टर">Login / Register</button>
+</section>
+</main>
+
+<footer>
+<strong>BIHARI MART – DIGITAL SEVA</strong>
+<p data-en="One World, One Platform" data-hi="एक दुनिया, एक प्लेटफॉर्म">One World, One Platform</p>
+<p>© 2026 BIHARI MART. All rights reserved.</p>
+<p data-en="Services are subject to authorized provider integration, applicable laws and approvals. No government affiliation is claimed." data-hi="सेवाएँ अधिकृत प्रदाता, लागू कानूनों और अनुमतियों के अधीन हैं। किसी सरकारी संबद्धता का दावा नहीं है।">Services are subject to authorized provider integration, applicable laws and approvals. No government affiliation is claimed.</p>
+</footer>
+
+<script>
+let hindi=false;
+function toggleLang(){
+ hindi=!hindi;
+ document.documentElement.lang=hindi?'hi':'en';
+ document.querySelectorAll('[data-en]').forEach(el=>el.textContent=el.dataset[hindi?'hi':'en']);
+ document.getElementById('search').placeholder=hindi?'सेवाएँ खोजें...':'Search services...';
+}
+function filterServices(){
+ const q=document.getElementById('search').value.toLowerCase();
+ document.querySelectorAll('.service').forEach(el=>{
+ el.classList.toggle('hidden',!((el.innerText+' '+el.dataset.name).toLowerCase().includes(q)));
+ });
+}
+function serviceInfo(en,hi){
+ alert((hindi?hi:en)+'\\n\\n'+(hindi?'यह सेवा अभी शुरू करने के लिए अधिकृत प्रदाता और आवश्यक अनुमतियों का एकीकरण बाकी है।':'This service is not activated yet. Authorized provider integration and required approvals are pending.'));
+}
+</script>
+<script src="/brand.js" defer></script>
+</body>
+</html>

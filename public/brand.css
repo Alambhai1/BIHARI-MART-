@@ -1,0 +1,12 @@
+
+.bm-global-header{background:white;box-shadow:0 3px 14px #001c5030;position:relative;z-index:9999;font-family:Arial,sans-serif}
+.bm-brand-top{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 4%;flex-wrap:wrap}
+.bm-brand-logo{width:min(390px,85vw);height:auto;display:block}
+.bm-brand-tag{color:#123879;font-weight:bold;text-align:center;font-size:14px}
+.bm-brand-nav{background:#092c75;display:flex;gap:5px;padding:10px 3%;overflow-x:auto}
+.bm-brand-nav a{color:white;text-decoration:none;font-weight:bold;padding:10px 13px;white-space:nowrap;border-radius:8px}
+.bm-brand-nav a:hover{background:#1476e9}
+.bm-brand-footer{background:#061f57;color:white;text-align:center;padding:24px 5%;margin-top:30px;font-family:Arial}
+.bm-brand-footer strong{font-size:19px}
+.bm-brand-footer p{font-size:13px;color:#e4edff}
+@media(max-width:600px){.bm-brand-top{justify-content:center}.bm-brand-tag{width:100%}.bm-brand-nav a{font-size:12px;padding:9px}}
