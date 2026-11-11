@@ -282,6 +282,42 @@ a:hover {
 </head>
 <body>
 
+<section id="bihari-services" style="padding:45px 16px;background:linear-gradient(135deg,#071b35,#123e68);color:white;text-align:center;">
+  <div style="max-width:1100px;margin:auto">
+    <div style="font-size:13px;letter-spacing:3px;color:#9bd7ff;font-weight:bold">ONE PLATFORM • GLOBAL SERVICES</div>
+    <h2 style="font-size:clamp(27px,5vw,42px);margin:12px 0">Explore BIHARI MART Services</h2>
+    <p style="color:#d5e8fa;max-width:650px;margin:0 auto 28px;line-height:1.7">Business, education and travel services — bringing useful opportunities together on one platform.</p>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:20px;text-align:left">
+      <a href="/digital-seva.html" style="text-decoration:none;color:inherit">
+        <div style="height:100%;padding:25px;border-radius:20px;background:linear-gradient(145deg,#087c83,#06465f);border:1px solid #65d9d0;box-shadow:0 12px 30px #0004">
+          <div style="font-size:45px">🌐</div>
+          <h3 style="font-size:25px;margin:12px 0">Digital Seva</h3>
+          <p style="line-height:1.7;color:#e0ffff">Explore digital assistance, certificates, KYC information, bill services and more.</p>
+          <div style="margin-top:22px;font-weight:bold;color:#fff">Explore Digital Seva →</div>
+        </div>
+      </a>
+      <a href="/education.html" style="text-decoration:none;color:inherit">
+        <div style="height:100%;padding:25px;border-radius:20px;background:linear-gradient(145deg,#7543b7,#30246d);border:1px solid #c7a6ff;box-shadow:0 12px 30px #0004">
+          <div style="font-size:45px">🎓</div>
+          <h3 style="font-size:25px;margin:12px 0">Education & Careers</h3>
+          <p style="line-height:1.7;color:#f0e8ff">Discover education opportunities, scholarships, exams, courses and career guidance.</p>
+          <div style="margin-top:22px;font-weight:bold;color:#fff">Explore Education →</div>
+        </div>
+      </a>
+      <a href="/travel.html" style="text-decoration:none;color:inherit">
+        <div style="height:100%;padding:25px;border-radius:20px;background:linear-gradient(145deg,#d16a23,#79320d);border:1px solid #ffd09c;box-shadow:0 12px 30px #0004">
+          <div style="font-size:45px">✈️</div>
+          <h3 style="font-size:25px;margin:12px 0">Travel Worldwide</h3>
+          <p style="line-height:1.7;color:#fff0df">Explore travel planning for flights, trains, buses, hotels and holiday packages.</p>
+          <div style="margin-top:22px;font-weight:bold;color:#fff">Explore Travel →</div>
+        </div>
+      </a>
+    </div>
+    <p style="font-size:12px;color:#c5d6e8;margin-top:24px">Service availability, applications, bookings and payments depend on official sources and authorized provider integrations.</p>
+  </div>
+</section>
+
+
 <header>
 <img src="/bihari-mart-logo.png"
      alt="BIHARI MART Logo"
@@ -592,7 +628,7 @@ unless officially agreed by the respective company.
 <h3>Founder Commission Wallet (Ledger)</h3>
 <p><strong>Important:</strong> This is an accounting ledger only. Real funds are not held here. Withdrawals are disabled until payment gateway approval and settlement integration.</p>
 <button onclick="loadAdminWallet()">Refresh Commission Wallet</button>
-<div id="adminWallet">Wallet not loaded.</div>
+<div id="adminWallet">Wallet not loaded.</div><h3>Digital Services - Transaction Control</h3><button onclick="loadAdminDigitalTransactions()">Refresh Digital Transactions</button><div id="adminDigitalTransactions">No transactions loaded.</div>
 
 <h3>Confidential Government Assistance</h3>
 <p>Private administrative section. Visible only to authenticated Admin.</p>
@@ -1734,5 +1770,134 @@ loadApprovedListings();
 </section>
 
 <script src="/education.js"></script>
+
+<!-- BIHARI MART DIGITAL SERVICES -->
+<div class="card" id="digitalServicesCard">
+<h2>BIHARI MART - Digital Services</h2>
+<p>Shopkeeper payment and recharge request centre.</p>
+<form id="digitalTransactionForm">
+<label>Service</label>
+<select id="digitalType" required>
+<option value="mobile_recharge">Mobile Recharge</option>
+<option value="money_transfer">Money Transfer Request</option>
+<option value="bill_payment">Bill Payment Request</option>
+</select>
+<label>Operator / Provider</label>
+<input id="digitalOperator" placeholder="Jio / Airtel / Vi / BSNL / Other">
+<label>Customer Mobile Number</label>
+<input id="digitalMobile" type="tel" maxlength="15" required placeholder="Mobile number">
+<label>Amount (INR)</label>
+<input id="digitalAmount" type="number" min="1" max="100000" step="0.01" required placeholder="Amount">
+<button type="submit">Submit Transaction Request</button>
+</form>
+<p id="digitalMessage">Login as a seller to submit requests.</p>
+<h3>My Transaction History</h3>
+<button type="button" onclick="loadMyDigitalTransactions()">Refresh My Transactions</button>
+<div id="myDigitalTransactions"></div>
+<p><strong>Security:</strong> Never enter or share UPI PIN, ATM PIN, CVV or OTP here. Requests are not actual money transfers until an authorized provider processes them.</p>
+</div>
+
+<script>
+async function loadMyDigitalTransactions() {
+  const box = document.getElementById("myDigitalTransactions");
+  box.textContent = "Loading...";
+  try {
+    const r = await fetch("/api/digital-services/my-transactions");
+    const d = await r.json();
+    if (!r.ok) throw new Error(d.message);
+    box.innerHTML = "";
+    if (!d.transactions.length) {
+      box.textContent = "No transactions yet.";
+      return;
+    }
+    d.transactions.forEach(t => {
+      const div = document.createElement("div");
+      div.className = "card";
+      [t.transaction_ref,t.service_type,t.customer_mobile,
+       "₹"+t.amount,t.status,new Date(t.created_at).toLocaleString()]
+       .forEach(value => {
+         const p = document.createElement("p");
+         p.textContent = value;
+         div.appendChild(p);
+       });
+      box.appendChild(div);
+    });
+  } catch(e) {
+    box.textContent = e.message || "Please login as seller.";
+  }
+}
+
+document.getElementById("digitalTransactionForm").addEventListener("submit", async e => {
+  e.preventDefault();
+  const msg = document.getElementById("digitalMessage");
+  msg.textContent = "Submitting...";
+  try {
+    const r = await fetch("/api/digital-services/transactions", {
+      method:"POST",
+      headers:{"Content-Type":"application/json"},
+      body:JSON.stringify({
+        service_type:document.getElementById("digitalType").value,
+        operator:document.getElementById("digitalOperator").value,
+        customer_mobile:document.getElementById("digitalMobile").value,
+        amount:document.getElementById("digitalAmount").value
+      })
+    });
+    const d = await r.json();
+    if (!r.ok) throw new Error(d.message);
+    msg.textContent = d.message + " Reference: " + d.transaction.transaction_ref;
+    e.target.reset();
+    loadMyDigitalTransactions();
+  } catch(err) {
+    msg.textContent = err.message;
+  }
+});
+
+async function loadAdminDigitalTransactions() {
+  const box = document.getElementById("adminDigitalTransactions");
+  box.textContent = "Loading...";
+  try {
+    const r = await fetch("/api/admin/digital-transactions");
+    const d = await r.json();
+    if (!r.ok) throw new Error(d.message);
+    box.innerHTML = "";
+    if (!d.transactions.length) {
+      box.textContent = "No digital transaction requests.";
+      return;
+    }
+    d.transactions.forEach(t => {
+      const div = document.createElement("div");
+      div.className = "card";
+      const details = document.createElement("p");
+      details.textContent = [
+        t.transaction_ref,t.user_name,t.user_phone,t.service_type,
+        t.customer_mobile,"₹"+t.amount,t.status,
+        new Date(t.created_at).toLocaleString()
+      ].join(" | ");
+      div.appendChild(details);
+      if (["pending","processing"].includes(t.status)) {
+        ["processing","failed"].forEach(status => {
+          const b = document.createElement("button");
+          b.textContent = status;
+          b.onclick = async () => {
+            const response = await fetch(
+              "/api/admin/digital-transactions/" + t.id + "/status",
+              {method:"PATCH",headers:{"Content-Type":"application/json"},
+               body:JSON.stringify({status})}
+            );
+            const result = await response.json();
+            alert(result.message);
+            if(response.ok) loadAdminDigitalTransactions();
+          };
+          div.appendChild(b);
+        });
+      }
+      box.appendChild(div);
+    });
+  } catch(e) {
+    box.textContent = e.message;
+  }
+}
+</script>
+
 </body>
 </html>

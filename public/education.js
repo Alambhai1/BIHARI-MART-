@@ -556,7 +556,10 @@
       if (currentUser && currentUser.role === "buyer") {
         await loadMyApplications();
       }
-      if (currentUser) await loadOwnerApplications();
+
+      if (currentUser) {
+        await loadOwnerApplications();
+      }
 
       if (currentUser && currentUser.role === "admin") {
         await loadAdminInstitutions();
