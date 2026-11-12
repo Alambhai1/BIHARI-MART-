@@ -280,6 +280,89 @@ a:hover {
 </style>
 
 <link rel="stylesheet" href="/brand.css">
+
+<style id="bihari-premium-design">
+:root {
+  --bm-blue:#0756c9;
+  --bm-dark:#10233f;
+  --bm-light:#f3f7fc;
+  --bm-gold:#f5b942;
+}
+* { box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body {
+  margin:0;
+  font-family:Inter,Arial,sans-serif;
+  color:var(--bm-dark);
+  background:var(--bm-light);
+}
+header,nav {
+  position:relative;
+  z-index:5;
+}
+header {
+  background:linear-gradient(120deg,#071c3b,#0756c9);
+  color:white;
+  box-shadow:0 5px 20px #10233f25;
+}
+nav {
+  background:white;
+  box-shadow:0 3px 15px #10233f12;
+}
+h1,h2,h3 { letter-spacing:-.5px; }
+h1 {
+  font-weight:850;
+  line-height:1.15;
+}
+button,.btn,a.button {
+  transition:all .2s ease;
+}
+button,.btn,a.button {
+  border-radius:10px;
+  font-weight:700;
+}
+button:hover,.btn:hover,a.button:hover {
+  transform:translateY(-2px);
+  box-shadow:0 7px 18px #0756c933;
+}
+input,select,textarea {
+  border:1px solid #d7e0ed;
+  border-radius:10px;
+  padding:12px;
+  max-width:100%;
+}
+input:focus,select:focus,textarea:focus {
+  outline:2px solid #0756c944;
+  border-color:var(--bm-blue);
+}
+.card,.machine-card,.listing-card,.product-card {
+  background:white;
+  border:1px solid #e5ebf4;
+  border-radius:16px;
+  overflow:hidden;
+  box-shadow:0 5px 22px #10233f0c;
+  transition:transform .2s,box-shadow .2s;
+}
+.card:hover,.machine-card:hover,.listing-card:hover,.product-card:hover {
+  transform:translateY(-4px);
+  box-shadow:0 12px 30px #10233f18;
+}
+img {
+  max-width:100%;
+}
+section { scroll-margin-top:90px; }
+footer {
+  background:#0b1d36;
+  color:#e8effa;
+}
+@media(max-width:600px) {
+  body { font-size:14px; }
+  h1 { font-size:30px; }
+  h2 { font-size:23px; }
+  button,.btn { min-height:42px; }
+}
+</style>
+
 </head>
 <body>
 
@@ -1901,5 +1984,5 @@ async function loadAdminDigitalTransactions() {
 </script>
 
 <script src="/brand.js" defer></script>
-</body>
+<footer><a href="/government-registration.html">Government Registration</a></footer></body>
 </html>
