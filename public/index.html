@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
+<meta name="theme-color" content="#123b70">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>BIHARI MART</title>
@@ -611,7 +615,7 @@ body #governmentComplianceCenter {
 <h1>BIHARI MART</h1>
 <p>Global Industrial Machinery Marketplace</p>
 </header>
-
+<section id="bmLiveAds" style="display:none;max-width:1200px;margin:20px auto;padding:16px;background:#fff;border:2px solid #e8ae35;border-radius:15px"><h2>Sponsored Advertisements</h2><div id="bmLiveAdsList"></div></section>
 <main>
 <div class="card">
 <h2>Welcome to BIHARI MART</h2>
@@ -621,6 +625,7 @@ body #governmentComplianceCenter {
   <a class="hero-btn primary" href="#approvedListings">Explore Machines</a>
   <a class="hero-btn secondary" href="#sellMachine">Sell Your Machine</a>
   <a class="hero-btn primary" href="#travel-portal">🚆✈️ Travel Booking</a>
+  <a class="hero-btn primary" href="/advertise.html">🌍 Advertise With BIHARI MART</a>
 </div>
 </div>
 <div class="card">
@@ -1074,7 +1079,16 @@ unless officially agreed by the respective company.
 <input id="machineState" type="text" placeholder="State / Province">
 <input id="machineCity" type="text" placeholder="City">
 
-<input id="machinePrice" type="number" min="1" placeholder="Machine Price">
+<input id="machinePrice" type="number" min="0.01" step="any" placeholder="Product / Service Price">
+<input id="machineStock" type="number" min="0" step="any" placeholder="Available Stock Quantity (optional)">
+<select id="machineUnit">
+<option value="">Select Unit (optional)</option>
+<option>Piece</option><option>KG</option><option>Gram</option>
+<option>Litre</option><option>ML</option><option>Pack</option>
+<option>Box</option><option>Jar</option><option>Dozen</option>
+<option>Set</option><option>Hour</option><option>Day</option>
+<option>Service</option><option>Unit</option>
+</select>
 
 <select id="machineCurrency">
 <option>INR</option>
@@ -1085,9 +1099,9 @@ unless officially agreed by the respective company.
 </select>
 
 <input id="machineMedia" type="file" accept="image/jpeg,image/png,image/webp,video/mp4" multiple>
-<textarea id="machineDescription" placeholder="Machine Description"></textarea>
+<textarea id="machineDescription" placeholder="Product / Service Description"></textarea>
 
-<button onclick="publishMachine()">Publish Machine</button>
+<button onclick="publishMachine()">Publish Listing</button>
 <p id="publishMessage"></p>
 </div>
 
@@ -1190,14 +1204,14 @@ async function loadApprovedListings() {
   const box = document.getElementById("approvedListings");
   if (!box) return;
 
-  box.textContent = "Loading machines...";
+  box.textContent = "Loading products and services...";
 
   try {
     const response = await fetch("/api/listings");
     const listings = await response.json();
 
     if (!response.ok) {
-      box.textContent = "Could not load machines.";
+      box.textContent = "Could not load products and services.";
       return;
     }
 
@@ -1225,7 +1239,7 @@ async function loadApprovedListings() {
     box.replaceChildren();
 
     if (!filteredListings.length) {
-      box.textContent = "No approved machines available yet.";
+      box.textContent = "No approved products or services available yet.";
       return;
     }
 
@@ -1235,13 +1249,19 @@ async function loadApprovedListings() {
 
       const title = document.createElement("h3");
       title.style.cssText = "font-size:20px;color:#123b60;margin:4px 0 12px";
-      title.textContent = item.title || "Machine";
+      title.textContent = item.title || "Product / Service";
       card.appendChild(title);
 
       const price = document.createElement("p");
       price.style.cssText = "font-size:23px;font-weight:700;color:#15803d;margin:12px 0";
-      price.textContent = "Price: " + item.price + " " + item.currency;
+      price.textContent = "Price: " + item.price + " " + item.currency + (item.unit ? " / " + item.unit : "");
       card.appendChild(price);
+      if (item.stock !== null && item.stock !== undefined && item.stock !== "") {
+        const stockInfo = document.createElement("p");
+        stockInfo.textContent = "Available Stock: " + item.stock + (item.unit ? " " + item.unit : "");
+        stockInfo.style.cssText = "font-weight:600;color:#2563eb;margin:8px 0";
+        card.appendChild(stockInfo);
+      }
 
       const category = document.createElement("p");
       category.style.cssText = "display:inline-block;background:#edf5fb;color:#174d75;padding:6px 10px;border-radius:6px;font-weight:bold";
@@ -1278,7 +1298,7 @@ async function loadApprovedListings() {
         media.src = path;
         media.style.cssText = "width:100%;height:190px;object-fit:contain;background:#f8fafc;border-radius:10px;display:block;margin:12px 0";
         if (isVideo) media.controls = true;
-        else media.alt = item.title || "Machine photo";
+        else media.alt = item.title || "Product photo";
         card.appendChild(media);
       });
 
@@ -1935,6 +1955,8 @@ async function publishMachine() {
   form.append("title", document.getElementById("machineTitle").value.trim());
   form.append("category", document.getElementById("machineCategory").value);
   form.append("price", document.getElementById("machinePrice").value);
+  form.append("stock", document.getElementById("machineStock").value);
+  form.append("unit", document.getElementById("machineUnit").value);
   form.append("currency", document.getElementById("machineCurrency").value);
   form.append("country", document.getElementById("machineCountry").value.trim());
   form.append("state", document.getElementById("machineState").value.trim());
@@ -1961,6 +1983,8 @@ async function publishMachine() {
       document.getElementById("machineTitle").value = "";
       document.getElementById("machineCategory").value = "";
       document.getElementById("machinePrice").value = "";
+      document.getElementById("machineStock").value = "";
+      document.getElementById("machineUnit").value = "";
       document.getElementById("machineCountry").value = "";
       document.getElementById("machineState").value = "";
       document.getElementById("machineCity").value = "";
@@ -2465,5 +2489,22 @@ async function loadAdminDigitalTransactions() {
 </script>
 
 <script src="/brand.js" defer></script>
-<footer><a href="/government-registration.html">Government Registration</a></footer><script>if("serviceWorker" in navigator){navigator.serviceWorker.register("/sw.js").catch(console.error);}</script></body>
+<footer><a href="/government-registration.html">Government Registration</a></footer><script>if("serviceWorker" in navigator){navigator.serviceWorker.register("/sw.js").catch(console.error);}</script>
+
+<script>
+fetch("/api/ads").then(r=>r.ok?r.json():[]).then(ads=>{
+ const section=document.getElementById("bmLiveAds"),box=document.getElementById("bmLiveAdsList");
+ if(!section||!box||!Array.isArray(ads)||!ads.length)return;
+ ads.forEach(ad=>{
+  const card=document.createElement("article");card.style.cssText="padding:14px;margin:10px 0;border:1px solid #dce6f2;border-radius:12px";
+  const link=document.createElement("a");link.href=ad.target_url;link.target="_blank";link.rel="noopener noreferrer sponsored";link.style.cssText="color:#0756c9;font-weight:bold";
+  link.textContent=ad.ad_title+" — "+ad.company_name;card.appendChild(link);
+  const desc=document.createElement("p");desc.textContent=ad.ad_description;card.appendChild(desc);
+  if(ad.image_url){const img=document.createElement("img");img.src=ad.image_url;img.alt=ad.ad_title;img.loading="lazy";img.style.cssText="max-width:100%;max-height:180px;object-fit:contain";card.appendChild(img)}
+  box.appendChild(card);
+ });
+ section.style.display="block";
+}).catch(()=>{});
+</script>
+</body>
 </html>
