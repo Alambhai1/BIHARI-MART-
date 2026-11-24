@@ -363,6 +363,208 @@ footer {
 }
 </style>
 
+
+<style id="bihari-global-premium-v2">
+:root {
+  --bm-blue:#0756c9;
+  --bm-navy:#071b35;
+  --bm-gold:#e8ae35;
+  --bm-bg:#f2f6fc;
+}
+
+body {
+  background:linear-gradient(180deg,#edf4fc,#f8faff);
+  color:#142b47;
+  font-family:Inter,"Segoe UI",Arial,sans-serif;
+}
+
+header {
+  position:relative;
+  overflow:hidden;
+  padding:55px 18px;
+  background:
+    radial-gradient(circle at 85% 15%,#ffffff25,transparent 30%),
+    linear-gradient(125deg,#06172e,#0756c9 65%,#087fba);
+  border-bottom:5px solid var(--bm-gold);
+  box-shadow:0 12px 35px #06172e25;
+}
+
+header img {
+  filter:drop-shadow(0 8px 12px #0004);
+  transition:transform .3s;
+}
+header img:hover { transform:scale(1.04); }
+
+header h1 {
+  font-size:clamp(34px,6vw,56px);
+  letter-spacing:2px;
+  text-shadow:0 4px 15px #0004;
+}
+
+header p {
+  font-size:17px;
+  letter-spacing:1px;
+}
+
+main {
+  max-width:1250px;
+  margin:35px auto;
+  padding:16px;
+}
+
+main > .card {
+  border:1px solid #e0e9f5;
+  border-radius:18px;
+  padding:27px;
+  margin-bottom:25px;
+  box-shadow:0 8px 28px #102b4910;
+  transition:transform .25s,box-shadow .25s;
+}
+
+main > .card:hover {
+  transform:translateY(-3px);
+  box-shadow:0 14px 35px #102b4919;
+}
+
+main > .card:first-child {
+  background:linear-gradient(120deg,#ffffff,#e9f3ff);
+  border-left:5px solid var(--bm-gold);
+}
+
+h1,h2,h3 { letter-spacing:-.4px; }
+
+h2 {
+  color:#092c55;
+  font-weight:850;
+}
+
+h2::after {
+  width:55px;
+  height:4px;
+  background:linear-gradient(90deg,#0756c9,#e8ae35);
+}
+
+h3 { color:#0756a8; }
+
+.hero-actions {
+  gap:12px;
+  align-items:center;
+}
+
+.hero-btn,button {
+  border-radius:11px;
+  font-weight:750;
+  transition:all .22s ease;
+}
+
+.hero-btn {
+  padding:14px 23px;
+  box-shadow:0 5px 14px #102b4918;
+}
+
+.hero-btn.primary {
+  background:linear-gradient(120deg,#0756c9,#087dbb);
+}
+
+.hero-btn.secondary {
+  background:linear-gradient(120deg,#e6a52d,#f28c28);
+}
+
+button {
+  background:linear-gradient(120deg,#0756c9,#087dbb);
+  padding:13px 21px;
+  box-shadow:0 4px 12px #0756c922;
+}
+
+button:hover,.hero-btn:hover {
+  transform:translateY(-2px);
+  filter:brightness(1.08);
+}
+
+input,select,textarea {
+  border:1px solid #d8e3f0;
+  border-radius:11px;
+  background:#fbfdff;
+  padding:14px;
+}
+
+input:focus,select:focus,textarea:focus {
+  outline:3px solid #0756c91c;
+  border-color:#0756c9;
+}
+
+ul li {
+  border:1px solid #e0eaf6;
+  border-left:4px solid var(--bm-gold);
+  border-radius:12px;
+  background:linear-gradient(120deg,#f7faff,#edf5ff);
+  padding:17px;
+}
+
+#approvedListings > div,
+#adminListings > div,
+#adminSellers > div,
+#adminInquiries > div,
+#sellerMessages > div {
+  border-radius:14px;
+  border:1px solid #e1e9f3;
+  box-shadow:0 5px 18px #102b490c;
+  background:#fff;
+  padding:18px;
+}
+
+#jobWorkMarketplace {
+  border:1px solid #cbdcf2 !important;
+  border-top:5px solid #0756c9 !important;
+  background:linear-gradient(145deg,#fff,#f1f7ff) !important;
+  border-radius:20px !important;
+}
+
+#jobWorkMarketplace hr {
+  border:0;
+  border-top:1px solid #dbe5f1;
+  margin:25px 0;
+}
+
+#global-manufacturers-invitation {
+  box-shadow:0 10px 30px #0756c918;
+}
+
+#sellerCommissionPolicy,
+#governmentComplianceCenter {
+  border-radius:17px;
+}
+
+a { transition:color .2s; }
+
+a:hover { color:#e18b18; }
+
+button:focus-visible,a:focus-visible {
+  outline:3px solid #e8ae35;
+  outline-offset:3px;
+}
+
+@media(max-width:650px) {
+  header { padding:35px 13px; }
+  header img { max-width:190px !important; }
+  header h1 { font-size:31px; }
+  header p { font-size:14px; }
+  main { padding:10px; margin:15px auto; }
+  main > .card { padding:18px; }
+  .hero-actions { flex-direction:column; align-items:stretch; }
+  .hero-btn { display:block; text-align:center; }
+  button { width:auto; max-width:100%; }
+  #approvedListings { grid-template-columns:1fr; }
+}
+</style>
+
+<link rel="manifest" href="/manifest.webmanifest"><meta name="theme-color" content="#123b70">
+<style id="compliance-private-visibility">
+body #governmentComplianceCenter {
+  display: none !important;
+}
+</style>
+
 </head>
 <body>
 
@@ -439,6 +641,25 @@ footer {
 </ul>
 </div>
 
+<div class="card" id="global-marketplace">
+<h2>🌍 BIHARI MART – Global Marketplace</h2>
+<p>Shop, sell and discover products and services across categories and countries.</p>
+<ul>
+<li>🛒 Grocery, Ration & Daily Essentials</li>
+<li>💧 Drinking Water & Water Jar Delivery</li>
+<li>☕ Cafe, Coffee, Bakery & Sweets</li>
+<li>🍽️ Restaurants, Food & Tiffin Delivery</li>
+<li>📦 Worldwide Shopping – Electronics, Fashion, Home & Kitchen</li>
+<li>🚗 Automobile, Vehicles & Spare Parts</li>
+<li>🏭 Industrial Machinery & Equipment</li>
+<li>🛠️ Job Work & Business Services</li>
+<li>📚 Books, Education & Training</li>
+</ul>
+<p><strong>Buyers, sellers, shops, restaurants and service providers worldwide are welcome.</strong></p>
+<p>Online ordering, delivery, payments and country-specific services will be enabled in stages after their required integrations and approvals.</p>
+</div>
+
+
 <div class="card">
 
 <div class="card">
@@ -478,7 +699,48 @@ oninput="loadApprovedListings()">
 <option>CLG Grinding</option>
 <option>Rubber Moulding</option>
 <option>Nut Former</option>
+
+<option>Grocery & Ration</option>
+<option>Rice, Flour & Pulses</option>
+<option>Fresh Vegetables & Fruits</option>
+<option>Drinking Water</option>
+<option>Water Jar Delivery</option>
+<option>Cafe & Coffee</option>
+<option>Restaurant</option>
+<option>Food & Tiffin Delivery</option>
+<option>Bakery & Sweets</option>
+<option>Daily Essentials</option>
+<option>Clothing & Fashion</option>
+<option>Electronics</option>
+<option>Home & Kitchen</option>
+<option>Beauty & Personal Care</option>
+<option>Books & Stationery</option>
+<option>Medical & Health Products</option>
+<option>Sports & Fitness</option>
+<option>Industrial Machinery</option>
+<option>Automobile & Spare Parts</option>
+<option>Job Work Services</option>
 <option>Other</option>
+
+<option value="cafe-restaurant">Cafe &amp; Restaurant</option>
+<option value="food-beverages">Food &amp; Beverages</option>
+<option value="grocery-rashan">Grocery &amp; Rashan</option>
+<option value="fruits-vegetables">Fruits &amp; Vegetables</option>
+<option value="dairy-bakery">Dairy &amp; Bakery</option>
+<option value="footwear">Footwear</option>
+<option value="mobile-electronics">Mobile &amp; Electronics</option>
+<option value="home-appliances">Home Appliances</option>
+<option value="furniture">Furniture</option>
+<option value="health-wellness">Health &amp; Wellness</option>
+<option value="toys-baby-products">Toys &amp; Baby Products</option>
+<option value="automobile-accessories">Automobile &amp; Accessories</option>
+<option value="hardware-tools">Hardware &amp; Tools</option>
+<option value="agriculture-farming">Agriculture &amp; Farming</option>
+<option value="construction-materials">Construction Materials</option>
+<option value="travel-hospitality">Travel &amp; Hospitality</option>
+<option value="education-training">Education &amp; Training</option>
+<option value="digital-services">Digital Services</option>
+<option value="other-products-services">Other Products &amp; Services</option>
 </select>
 
 <button onclick="loadApprovedListings()">Refresh Machines</button>
@@ -571,35 +833,7 @@ oninput="loadApprovedListings()">
 </div>
 
 
-<div class="card" id="governmentComplianceCenter">
-<h2>Government Compliance Center</h2>
-<p><strong>Platform Name:</strong> BIHARI MART</p>
-<p><strong>Proposed Legal Company Name:</strong> BIHARI MART INDIA PRIVATE LIMITED</p>
-<p><strong>Company Registration Status:</strong> Not Yet Registered</p>
-<p><strong>Proposed Operating Location:</strong> Haryana, India</p>
-<p><strong>Registered Office:</strong> Not Yet Finalized</p>
 
-<h3>Government Registration Status</h3>
-<ul>
-<li>Company Incorporation / CIN: Pending</li>
-<li>Company PAN: Pending</li>
-<li>TAN: Pending</li>
-<li>GSTIN: Not Registered</li>
-<li>Udyam / MSME: Not Registered</li>
-<li>Import Export Code (IEC): Not Registered</li>
-</ul>
-
-<h3>Official Government Portals</h3>
-<ul>
-<li><a href="https://www.mca.gov.in/" target="_blank" rel="noopener">MCA – Company Name and Incorporation</a></li>
-<li><a href="https://www.gst.gov.in/" target="_blank" rel="noopener">GST – GST Registration</a></li>
-<li><a href="https://www.incometax.gov.in/" target="_blank" rel="noopener">Income Tax – PAN / TAN Information</a></li>
-<li><a href="https://udyamregistration.gov.in/" target="_blank" rel="noopener">Udyam – MSME Registration</a></li>
-<li><a href="https://www.dgft.gov.in/" target="_blank" rel="noopener">DGFT – Import Export Code (IEC)</a></li>
-</ul>
-
-<p>BIHARI MART provides information and links to official government portals. Registration, approval and issuance of certificates are subject to government rules and approval. BIHARI MART is not a government website.</p>
-</div>
 
 
 
@@ -688,7 +922,7 @@ unless officially agreed by the respective company.
 <p><strong>Payment Status:</strong> Online commission calculation, wallet and bank settlement features will be activated after payment system integration.</p>
 </div>
 
-<div class="card">
+<div class="card" id="login">
 <h2>Buyer / Seller / Admin Login</h2>
 <input id="loginPhone" type="tel" placeholder="Mobile Number">
 <input id="loginPassword" type="password" placeholder="Password">
@@ -719,6 +953,35 @@ unless officially agreed by the respective company.
 <button onclick="loadAdminGovernmentRequest()">View Government Request</button>
 <div id="adminGovernmentRequest">Request not loaded.</div>
 
+<div class="card" id="governmentComplianceCenter">
+<h2>Government Compliance Center</h2>
+<p><strong>Platform Name:</strong> BIHARI MART</p>
+<p><strong>Proposed Legal Company Name:</strong> BIHARI MART INDIA PRIVATE LIMITED</p>
+<p><strong>Company Registration Status:</strong> Not Yet Registered</p>
+<p><strong>Proposed Operating Location:</strong> Haryana, India</p>
+<p><strong>Registered Office:</strong> Not Yet Finalized</p>
+
+<h3>Government Registration Status</h3>
+<ul>
+<li>Company Incorporation / CIN: Pending</li>
+<li>Company PAN: Pending</li>
+<li>TAN: Pending</li>
+<li>GSTIN: Not Registered</li>
+<li>Udyam / MSME: Not Registered</li>
+<li>Import Export Code (IEC): Not Registered</li>
+</ul>
+
+<h3>Official Government Portals</h3>
+<ul>
+<li><a href="https://www.mca.gov.in/" target="_blank" rel="noopener">MCA – Company Name and Incorporation</a></li>
+<li><a href="https://www.gst.gov.in/" target="_blank" rel="noopener">GST – GST Registration</a></li>
+<li><a href="https://www.incometax.gov.in/" target="_blank" rel="noopener">Income Tax – PAN / TAN Information</a></li>
+<li><a href="https://udyamregistration.gov.in/" target="_blank" rel="noopener">Udyam – MSME Registration</a></li>
+<li><a href="https://www.dgft.gov.in/" target="_blank" rel="noopener">DGFT – Import Export Code (IEC)</a></li>
+</ul>
+
+<p>BIHARI MART provides information and links to official government portals. Registration, approval and issuance of certificates are subject to government rules and approval. BIHARI MART is not a government website.</p>
+</div>
 </div>
 
 <div class="card" id="sellerInbox" style="display:none">
@@ -763,7 +1026,48 @@ unless officially agreed by the respective company.
 <option>CLG Grinding</option>
 <option>Rubber Moulding</option>
 <option>Nut Former</option>
+
+<option>Grocery & Ration</option>
+<option>Rice, Flour & Pulses</option>
+<option>Fresh Vegetables & Fruits</option>
+<option>Drinking Water</option>
+<option>Water Jar Delivery</option>
+<option>Cafe & Coffee</option>
+<option>Restaurant</option>
+<option>Food & Tiffin Delivery</option>
+<option>Bakery & Sweets</option>
+<option>Daily Essentials</option>
+<option>Clothing & Fashion</option>
+<option>Electronics</option>
+<option>Home & Kitchen</option>
+<option>Beauty & Personal Care</option>
+<option>Books & Stationery</option>
+<option>Medical & Health Products</option>
+<option>Sports & Fitness</option>
+<option>Industrial Machinery</option>
+<option>Automobile & Spare Parts</option>
+<option>Job Work Services</option>
 <option>Other</option>
+
+<option value="cafe-restaurant">Cafe &amp; Restaurant</option>
+<option value="food-beverages">Food &amp; Beverages</option>
+<option value="grocery-rashan">Grocery &amp; Rashan</option>
+<option value="fruits-vegetables">Fruits &amp; Vegetables</option>
+<option value="dairy-bakery">Dairy &amp; Bakery</option>
+<option value="footwear">Footwear</option>
+<option value="mobile-electronics">Mobile &amp; Electronics</option>
+<option value="home-appliances">Home Appliances</option>
+<option value="furniture">Furniture</option>
+<option value="health-wellness">Health &amp; Wellness</option>
+<option value="toys-baby-products">Toys &amp; Baby Products</option>
+<option value="automobile-accessories">Automobile &amp; Accessories</option>
+<option value="hardware-tools">Hardware &amp; Tools</option>
+<option value="agriculture-farming">Agriculture &amp; Farming</option>
+<option value="construction-materials">Construction Materials</option>
+<option value="travel-hospitality">Travel &amp; Hospitality</option>
+<option value="education-training">Education &amp; Training</option>
+<option value="digital-services">Digital Services</option>
+<option value="other-products-services">Other Products &amp; Services</option>
 </select>
 
 <input id="machineCountry" type="text" placeholder="Country (e.g. India)">
@@ -843,6 +1147,40 @@ Rohtak, Haryana – 124001</p>
 BIHARI MART – Your Global Machinery Business Partner
 </p>
 </div>
+
+<section class="card" id="jobWorkMarketplace" style="margin:20px 0;padding:20px">
+<h2>🌍 Job Work Marketplace</h2>
+<p>Fasteners and Automobile manufacturing job work connections worldwide.</p>
+<p><strong>Planned seller/job worker commission: 1% on successful work.</strong>
+No real-money deduction or settlement is enabled.</p>
+
+<h3>Post Job Work (Buyer)</h3>
+<label>Job Category</label>
+<select id="jwType"><option value="Fasteners">Fasteners Job Work</option><option value="Automobile">Automobile Job Work</option></select>
+<label>Job / Component Name</label>
+<input id="jwTitle" placeholder="Example: M10 Bolt Thread Rolling">
+<label>Specifications / Work Details</label>
+<textarea id="jwDescription" placeholder="Material, drawing, process, quality requirements..."></textarea>
+<label>Quantity</label><input id="jwQuantity" type="number" min="1" placeholder="Quantity">
+<label>Unit</label><select id="jwUnit"><option>Pieces</option><option>Kg</option><option>Lots</option><option>Sets</option></select>
+<label>Optional Budget</label><input id="jwBudget" type="number" min="1" placeholder="Budget">
+<label>Currency</label><select id="jwCurrency"><option>INR</option><option>USD</option><option>EUR</option><option>GBP</option><option>AED</option></select>
+<label>Required Completion Date</label><input id="jwDeadline" type="date">
+<label>Country</label><input id="jwCountry" placeholder="Country">
+<label>City</label><input id="jwCity" placeholder="City (optional)">
+<button type="button" onclick="postJobWork()">Post Job Work</button>
+<p id="jwPostMessage"></p>
+<hr>
+<h3>Available Jobs (Seller / Job Worker)</h3>
+<button type="button" onclick="loadJobWorkJobs()">Refresh Available Jobs</button>
+<div id="jwAvailableJobs">Login as Seller to view available jobs.</div>
+<hr>
+<h3>My Posted Jobs (Buyer)</h3>
+<button type="button" onclick="loadMyJobWork()">Refresh My Jobs</button>
+<div id="jwMyJobs">Login as Buyer to view your jobs.</div>
+<div id="jwQuotes"></div>
+</section>
+
 </main>
 
 
@@ -960,10 +1298,54 @@ async function loadApprovedListings() {
       const buyNowButton = document.createElement("button");
       buyNowButton.textContent = "Buy Now";
       buyNowButton.style.cssText = "background:#15803d;margin:8px 5px 8px 0";
-      buyNowButton.addEventListener("click", () => {
-        inquiryStatus.textContent = "To proceed, write your purchase inquiry below.";
-        inquiryInput.scrollIntoView({behavior:"smooth", block:"center"});
-        inquiryInput.focus();
+      buyNowButton.addEventListener("click", async () => {
+        const quantityText = prompt("How many units do you want to order?", "1");
+        if (quantityText === null) return;
+
+        const quantity = Number(quantityText);
+        if (!Number.isInteger(quantity) || quantity < 1 || quantity > 10000) {
+          inquiryStatus.textContent = "Please enter a valid quantity (1 to 10000).";
+          return;
+        }
+
+        const deliveryAddress = prompt("Enter your complete delivery address:");
+        if (!deliveryAddress || !deliveryAddress.trim()) {
+          inquiryStatus.textContent = "Delivery address is required.";
+          return;
+        }
+
+        buyNowButton.disabled = true;
+        inquiryStatus.textContent = "Sending order request...";
+
+        try {
+          const response = await fetch("/api/orders", {
+            method: "POST",
+            headers: {"Content-Type": "application/json"},
+            credentials: "same-origin",
+            body: JSON.stringify({
+              listingId: item.id,
+              quantity,
+              deliveryAddress: deliveryAddress.trim(),
+              note: inquiryInput.value.trim()
+            })
+          });
+
+          const result = await response.json();
+
+          if (response.status === 403) {
+            inquiryStatus.textContent = "Please login with a Buyer account before ordering.";
+          } else if (!response.ok) {
+            inquiryStatus.textContent = result.message || "Order could not be created.";
+          } else {
+            inquiryStatus.textContent =
+              "Order request submitted! Order ID: " + result.order.id +
+              ". Payment and delivery are not enabled yet.";
+          }
+        } catch (error) {
+          inquiryStatus.textContent = "Network error. Please try again.";
+        } finally {
+          buyNowButton.disabled = false;
+        }
       });
 
       sendButton.addEventListener("click", async () => {
@@ -1146,6 +1528,7 @@ async function loginUser() {
       const sellerInbox = document.getElementById("sellerInbox");
 
       adminPanel.style.display = role === "admin" ? "block" : "none";
+      document.getElementById("governmentComplianceCenter").style.setProperty("display", role === "admin" ? "block" : "none", "important");
       sellerInbox.style.display = role === "seller" ? "block" : "none";
 
       if (role === "admin") {
@@ -1531,6 +1914,7 @@ async function logoutUser() {
     const response = await fetch("/api/logout", {method: "POST"});
     const data = await response.json();
     document.getElementById("adminPanel").style.display = "none";
+    document.getElementById("governmentComplianceCenter").style.setProperty("display", "none", "important");
     document.getElementById("loginMessage").textContent = data.message;
   } catch (error) {
     document.getElementById("loginMessage").textContent = "Logout failed";
@@ -1590,6 +1974,103 @@ async function publishMachine() {
 
 
 loadApprovedListings();
+
+// Job Work Marketplace browser functions
+async function postJobWork() {
+  const box=document.getElementById("jwPostMessage");
+  box.textContent="Posting...";
+  const payload={
+    type:document.getElementById("jwType").value,
+    title:document.getElementById("jwTitle").value,
+    description:document.getElementById("jwDescription").value,
+    quantity:document.getElementById("jwQuantity").value,
+    unit:document.getElementById("jwUnit").value,
+    budget:document.getElementById("jwBudget").value,
+    currency:document.getElementById("jwCurrency").value,
+    deadline:document.getElementById("jwDeadline").value,
+    country:document.getElementById("jwCountry").value,
+    city:document.getElementById("jwCity").value
+  };
+  try {
+    const r=await fetch("/api/job-work/jobs",{method:"POST",credentials:"same-origin",headers:{"Content-Type":"application/json"},body:JSON.stringify(payload)});
+    const d=await r.json(); box.textContent=d.message||"Could not post";
+    if(r.ok) { ["jwTitle","jwDescription","jwQuantity","jwBudget","jwDeadline","jwCountry","jwCity"].forEach(id=>document.getElementById(id).value=""); loadMyJobWork(); }
+  } catch(e) { box.textContent="Server connection failed"; }
+}
+
+async function loadJobWorkJobs() {
+  const box=document.getElementById("jwAvailableJobs"); box.textContent="Loading...";
+  try {
+    const r=await fetch("/api/job-work/jobs",{credentials:"same-origin"}); const jobs=await r.json();
+    if(!r.ok) { box.textContent=jobs.message||"Seller login required"; return; }
+    box.replaceChildren();
+    if(!jobs.length) { box.textContent="No open jobs yet."; return; }
+    jobs.forEach(job=>{
+      const card=document.createElement("div"); card.style.cssText="border:1px solid #dbe4ee;padding:12px;margin:10px 0;border-radius:8px";
+      const title=document.createElement("h4"); title.textContent=job.type+" - "+job.title; card.appendChild(title);
+      const detail=document.createElement("p"); detail.textContent=job.description+" | Quantity: "+job.quantity+" "+job.unit+" | Location: "+job.city+" "+job.country+" | Budget: "+(job.budget||"Not specified")+" "+job.currency; card.appendChild(detail);
+      const amount=document.createElement("input"); amount.type="number"; amount.min="1"; amount.placeholder="Your quotation amount"; card.appendChild(amount);
+      const days=document.createElement("input"); days.type="number"; days.min="1"; days.placeholder="Delivery days"; card.appendChild(days);
+      const currency=document.createElement("select");
+      ["INR","USD","EUR","GBP","AED"].forEach(v=>{const o=document.createElement("option");o.value=v;o.textContent=v;currency.appendChild(o);}); card.appendChild(currency);
+      const message=document.createElement("textarea"); message.placeholder="Quotation details (optional)"; card.appendChild(message);
+      const btn=document.createElement("button"); btn.type="button"; btn.textContent="Submit Quotation";
+      btn.onclick=async()=>{
+        btn.disabled=true;
+        try {
+          const q=await fetch("/api/job-work/jobs/"+encodeURIComponent(job.id)+"/quotations",{method:"POST",credentials:"same-origin",headers:{"Content-Type":"application/json"},body:JSON.stringify({amount:amount.value,deliveryDays:days.value,currency:currency.value,message:message.value})});
+          const data=await q.json(); alert(data.message||"Quotation request completed");
+        } catch(e) { alert("Server connection failed"); }
+        finally { btn.disabled=false; }
+      };
+      card.appendChild(btn); box.appendChild(card);
+    });
+  } catch(e) { box.textContent="Server connection failed"; }
+}
+
+async function loadMyJobWork() {
+  const box=document.getElementById("jwMyJobs"); box.textContent="Loading...";
+  try {
+    const r=await fetch("/api/job-work/my-jobs",{credentials:"same-origin"}); const jobs=await r.json();
+    if(!r.ok) { box.textContent=jobs.message||"Buyer login required"; return; }
+    box.replaceChildren();
+    if(!jobs.length) { box.textContent="You have not posted any jobs."; return; }
+    jobs.forEach(job=>{
+      const card=document.createElement("div"); card.style.cssText="border:1px solid #dbe4ee;padding:12px;margin:10px 0;border-radius:8px";
+      const heading=document.createElement("h4"); heading.textContent=job.type+" - "+job.title+" ("+job.status+")"; card.appendChild(heading);
+      const info=document.createElement("p"); info.textContent="Quantity: "+job.quantity+" "+job.unit+" | "+job.country; card.appendChild(info);
+      const btn=document.createElement("button"); btn.type="button"; btn.textContent="View Quotations";
+      btn.onclick=()=>loadJobWorkQuotes(job.id,card); card.appendChild(btn); box.appendChild(card);
+    });
+  } catch(e) { box.textContent="Server connection failed"; }
+}
+
+async function loadJobWorkQuotes(jobId,box) {
+  try {
+    const r=await fetch("/api/job-work/jobs/"+encodeURIComponent(jobId)+"/quotations",{credentials:"same-origin"});
+    const quotes=await r.json();
+    if(!r.ok) { alert(quotes.message||"Could not load quotations"); return; }
+    const area=document.createElement("div");
+    if(!quotes.length) { area.textContent="No quotations received yet."; }
+    quotes.forEach(q=>{
+      const row=document.createElement("div"); row.style.cssText="border-top:1px solid #ddd;padding:8px";
+      const p=document.createElement("p"); p.textContent=q.sellerName+" | "+q.amount+" "+q.currency+" | Delivery: "+q.deliveryDays+" days | Status: "+q.status+" | "+(q.message||""); row.appendChild(p);
+      if(q.status==="submitted") {
+        const btn=document.createElement("button"); btn.type="button"; btn.textContent="Accept Quotation";
+        btn.onclick=async()=>{
+          if(!confirm("Accept this quotation? Payment is not processed by BIHARI MART.")) return;
+          const a=await fetch("/api/job-work/quotations/"+encodeURIComponent(q.id)+"/accept",{method:"PATCH",credentials:"same-origin",headers:{"Content-Type":"application/json"},body:"{}"});
+          const d=await a.json(); alert(d.message||"Request completed"); loadMyJobWork();
+        };
+        row.appendChild(btn);
+      }
+      area.appendChild(row);
+    });
+    const old=box.querySelector(".jw-quote-results"); if(old) old.remove();
+    area.className="jw-quote-results"; box.appendChild(area);
+  } catch(e) { alert("Server connection failed"); }
+}
+
 </script>
 
 
@@ -1984,5 +2465,5 @@ async function loadAdminDigitalTransactions() {
 </script>
 
 <script src="/brand.js" defer></script>
-<footer><a href="/government-registration.html">Government Registration</a></footer></body>
+<footer><a href="/government-registration.html">Government Registration</a></footer><script>if("serviceWorker" in navigator){navigator.serviceWorker.register("/sw.js").catch(console.error);}</script></body>
 </html>
